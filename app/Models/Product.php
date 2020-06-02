@@ -15,6 +15,7 @@ class Product extends Model
         'price', 
         'discount',
         'quantity',
+        'thumbnail'
            
      ];
 
@@ -28,13 +29,7 @@ class Product extends Model
          return $this->belongsToMany(\App\Models\Order::class)->withPivot('quantity', 'price');
      }
 
-
-     public function thumbnail()
-     {
-         return $this->morphOne(\App\Models\Image::class, 'imageable');
-     }
-
-     
+        
      public function image()
      {
          return $this->morphMany(\App\Models\Image::class, 'imageable');
