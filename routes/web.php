@@ -32,3 +32,60 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/send', 'MailController@send');
+
+
+
+// Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(['namespace' => 'Admin'], function(){
+//     Route::get('/',' Admin@index')->name('dashboard');
+
+
+    //*admin/products
+//     Route::prefix('products')->name('products.')->group(function(){
+//         Route::get('/', 'Adminr@index')->name('index');
+//         Route::post('/create', 'Admin@create')->name('create');
+//         Route::patch('/edit', 'Admin@edit')->name('edit');
+//         Route::delete('/delete', 'Admin@delete')->name('delete');
+//     });
+
+    //*admin/category
+//      Route::prefix('category')->name('category.')->group(function(){ 
+//         Route::get('/', 'Admin@index')->name('index');
+//         Route::post('/create', 'Admin@create')->name('create');
+//         Route::patch('/edit', 'Admin@edit')->name('edit');
+//         Route::delete('/delete', 'Admin@delete')->name('delete');
+//      });
+
+    //*admin/orders
+//     Route::prefix('orders')->name('orders.')->group(function(){
+//         Route::get('/', 'Admin@index')->name('index');
+//         Route::post('/create', 'Admin@create')->name('create');
+//         Route::patch('/edit', 'Admin@edit')->name('edit');
+//         Route::delete('/delete', 'Admin@delete')->name('delete');
+//     });
+
+    //*admin/category
+//     Route::prefix('users')->name('users.')->group(function(){
+//         Route::get('/', 'Admin@index')->name('index');
+//         Route::get('/{id}', 'Admin@profile')->name('profile')->where('id', '[0-9]+');
+//         Route::delete('/delit', 'Admin@delete')->name('delit');
+//     });
+
+
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
