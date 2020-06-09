@@ -17,6 +17,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
        'id', 
+       'role_id',
        'name', 
        'surname',
        'email', 
@@ -59,4 +60,27 @@ class User extends Authenticatable
     {
         return $this->morphOne(\App\Models\Image::class, 'imageable');
     }
+//мутаторы
+    public function setFirstNameAtribute($value)
+    {
+        $this->attributes['first_name'] = ucfirst($value);
+    }
+
+    public function serPasswordAttribute($password)
+    {
+        $this->attributes['password'] = \Hash::make($password);
+    }
+
+    // public function getFirstNameAttribute() 
+    // {
+    //     return "First name:" . ucfirst($this->attributes['name']);
+    // }
+
+    public function getIsAdminAttribute()
+    {
+       return $this->role->name === config('roles.admin');
+    }
 }
+
+
+

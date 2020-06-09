@@ -23,6 +23,8 @@
 </head>
 <body>
     <div id="app">
+@section('navbar')
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -57,6 +59,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @if(auth()->user()->IsAdmin)
+                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        {{ __('Dashboard') }}
+                                    </a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -73,7 +80,19 @@
                 </div>
             </div>
         </nav>
+        @show
 
+        @if(session('status'))
+        <div class="alert alert-success">
+            {{session('status')}}
+        </div>
+        @endif
+        
+        @if(session('customeError'))
+        <div class="alert alert-warning">
+            {{session('customeError')}}
+        </div>
+        @endif
         <main class="py-4">
             @yield('content')
         </main>

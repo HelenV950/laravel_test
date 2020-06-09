@@ -16,7 +16,7 @@ class IsAdmin
     public function handle($request, Closure $next)
     {
         // dd(auth()->user()->role->id);
-        // dd($request);
+         //dd($request);
         
         if(auth()->user()->IsAdmin){
             return $next($request);

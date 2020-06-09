@@ -11,8 +11,18 @@ class OrdersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Order::class, 5)->create()->each(function($order){
-            $order->products()->attach(\App\Models\Product::get()->random());
+       
+        factory(\App\Models\Order::class, 5)->create()->each(function(\App\Models\Order $order){
+           $countOfProduct = rand(1,3);
+           for($i = 0; $i < $countOfProduct; $i++){
+              $quantity= rand(1,5);
+              $product = \App\Models\Product::all()->rand();
+           }
+           
+            $product->orders()->updateExistingPivot($order, [
+                'quantity' => $quantity,
+                'price' => $product->price
+            ]);
         });
     }
 }
