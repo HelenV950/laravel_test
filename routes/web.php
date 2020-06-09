@@ -36,7 +36,7 @@ Route::get('/send', 'MailController@send');
 
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->name('admin.')->group( function(){
-    Route::get('/dashboard',' DashboardController@index')->name('dashboard');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 
     //*admin/products
