@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 
 class Image extends Model
 {
@@ -14,9 +15,9 @@ class Image extends Model
 
     ];
 
-    protected $hidden = [
-        'imageable_id', 'imageable_type'
-    ];
+    // protected $hidden = [
+    //     'imageable_id', 'imageable_type'
+    // ];
 
     public $timestamps = false;
 
@@ -29,5 +30,11 @@ class Image extends Model
     {
         return $this->morphToMany(\App\Models\Product::class, 'imageable');
     }
+
+    // public function setPathAttribute(UploadedFile $file)
+    // {
+        
+    //    $this->path = $imageService->upload($file); 
+    // }
 
 }

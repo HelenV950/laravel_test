@@ -20,7 +20,7 @@ class CreateCategoryRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'A title title is required',
+            'title.required' => 'A title is required',
             'description.required' => 'A description is required',
             'description.min' => 'Lengs of description should be more than 10 characters'
 

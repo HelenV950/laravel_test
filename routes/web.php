@@ -48,12 +48,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->name(
 //     });
 
     //*admin/category
-//      Route::prefix('categories')->name('categories.')->group(function(){ 
-//         Route::get('/', 'CategoriesController@index')->name('index');
-//         Route::post('/create'CatrgoriesController@create')->name('create');
+    //  Route::prefix('categories')->name('categories.')->group(function(){ 
+    //     Route::get('/', 'CategoriesController@index')->name('index');
+    //     Route::get('/create','CategoriesController@create')->name('create');
 //         Route::patch('/edit', 'CatrgoriesController@edit')->name('edit');
 //         Route::delete('/delete', 'CatrgoriesController@delete')->name('destroy');
-//      });
+    // });
         Route::resource('categories', 'CategoriesController')->except(['show']);
 
     //*admin/orders

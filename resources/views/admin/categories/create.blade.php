@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h1>hello!</h1>
+           
             <div class="card">
                 <div class="card-header">Create Category</div>
 
@@ -21,7 +21,7 @@
                     @endif
 
 
-                  <form method="POST" action="{{ route('admin.categories.store') }}">
+                  <form method="POST" action="{{ route('admin.categories.store') }}" enctype="multipart/form-data">
                       @csrf
 
                       <div class="form-group row">
@@ -30,12 +30,31 @@
                           <div class="col-md-6">
                               <input id="title" 
                               type="text" 
-                              class="form-control @error('title') is-invalid @enderror" title="title" 
+                              class="form-control @error('title') is-invalid @enderror" 
+                              name="title" 
                               value="{{ old('title') }}" 
                               required 
                               autofocus>
 
                               @error('title')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                              @enderror
+                          </div>
+                      </div>
+
+                      <div class="form-group row">
+                          <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
+
+                          <div class="col-md-6">
+                              <input id="image" 
+                              type="file" 
+                              class="form-control @error('image') is-invalid @enderror" 
+                              name="image" 
+                              value="{{ old('image') }}">
+
+                              @error('image')
                                   <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>
                                   </span>
