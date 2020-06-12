@@ -63,10 +63,12 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
+
+      
         if (isset($data['_token'])) {
             unset($data['_token']);
         }
@@ -77,7 +79,7 @@ class RegisterController extends Controller
            config('roles.customer'))
            ->first()->id;
 
-        //dd($data);
+         //dd($data);
         return User::create($data);
     
     }
