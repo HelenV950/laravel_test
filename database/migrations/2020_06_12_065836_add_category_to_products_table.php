@@ -14,11 +14,12 @@ class AddCategoryToProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->unsignedBigInteger('category_id')->after('id');
+            $table->unsignedBigInteger('category_id')->nullable()->after('id');
 
             $table->foreign('category_id')
             ->references('id')
-            ->on('categories');
+            ->on('categories')
+            ->onDelete('set null');
         });
     }
 

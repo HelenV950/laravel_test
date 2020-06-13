@@ -15,9 +15,9 @@ class Image extends Model
 
     ];
 
-    // protected $hidden = [
-    //     'imageable_id', 'imageable_type'
-    // ];
+    protected $hidden = [
+        'imageable_id', 'imageable_type'
+    ];
 
     public $timestamps = false;
 
@@ -31,10 +31,18 @@ class Image extends Model
         return $this->morphToMany(\App\Models\Product::class, 'imageable');
     }
 
-    // public function setPathAttribute(UploadedFile $file)
-    // {
-        
-    //    $this->path = $imageService->upload($file); 
-    // }
+    public function categories()
+    {
+        return $this->morphToMany(\App\Models\Category::class, 'imageable');
+    }
+
+
+
+    //public function setPathAttribute($filePath)
+    //{
+
+       //dd($filePath); 
+       //$this->path = $filePath; 
+    //}
 
 }

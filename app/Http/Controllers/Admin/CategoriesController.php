@@ -49,7 +49,7 @@ class CategoriesController extends Controller
         //dd($request);
         // $imageService = app()->make(\App\Services\Contract\ImageServiceInterface::class);
         // $filePath = $imageService->upload($request->file('image'));
-        
+
         // dd($filePath);
 
         $newCategory = $category->create([
@@ -57,17 +57,17 @@ class CategoriesController extends Controller
             'description' => $request->get('description')
         ]);
 
-        if(!empty($request->file('image')))
-        {
+        if (!empty($request->file('image'))) {
             $imageService = app()->make(\App\Services\Contract\ImageServiceInterface::class);
             $filePath = $imageService->upload($request->file('image'));
-    
+            // dd($category->image()->first()->path);
+            $imageService->remove($category->image()->first()->path);
             $newCategory->image()
-            ->create([
-                'path' => $filePath
+                ->create([
+                    'path' => $filePath
                 ]);
         }
-    
+
 
         return redirect(route('admin.categories.index'))
             ->with(['status' => 'The category has been created']);
@@ -95,8 +95,14 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        //dd($category);
-        return view('admin/categories/edit', compact('category'));
+        //dd($category->image()->first());
+        $image = array();
+        //dd($category->image()->exists());
+        if ($category->image()->exists()) {
+            $image = $category->image()->first()->toArray();
+        }
+        //dd($image);
+        return view('admin/categories/edit', compact('category',  'image'));
     }
 
     /**
@@ -108,11 +114,26 @@ class CategoriesController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //dd(request()->all());
+        //dd($request->files);
         $category->update([
             'title' => $request->get('title'),
             'description' => $request->get('description')
         ]);
+
+        if (!empty($request->file('image'))) {
+            $imageService = app()->make(\App\Services\Contract\ImageServiceInterface::class);
+            $filePath = $imageService->upload($request->file('image'));
+
+            // $category->image()->delete();
+            $imageService->remove($category->image()->first()->path);
+
+            $category->image()
+                ->update([
+                    'path' => $filePath
+                ]);
+
+            //dd($result);
+        }
 
         return redirect(route('admin.categories.index'))
             ->with(['status' => 'The category was seccessfully updated!']);
@@ -127,8 +148,9 @@ class CategoriesController extends Controller
     public function destroy(Category $category)
     {
         //dd($category->products());
-
+        
         $category->delete();
+        $category->image()->delete();
 
         return redirect(route('admin.categories.index'))
             ->with(['status' => 'The category was seccessfully removed!']);

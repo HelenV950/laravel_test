@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Admin',
             'surname' => 'Adminovich',
             'email' => env('ADMIN_EMAIL'),
-            'password' => Hash::make(env('ADMIN_PASSWORD')), 
+            'password' =>env('ADMIN_PASSWORD'), 
             'birth_date' => '1980-12-12',
             'phone' => env('ADMIN_PHONE')
 
