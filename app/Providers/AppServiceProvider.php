@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-               //\App\Models\Image::observe(\App\Observers\ImageObserver::class);
-               Category::observe(CategoryObserver::class);
+        //\App\Models\Image::observe(\App\Observers\ImageObserver::class);
+        Category::observe(CategoryObserver::class);
     }
 }

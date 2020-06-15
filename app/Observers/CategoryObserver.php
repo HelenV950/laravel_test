@@ -25,12 +25,12 @@ class CategoryObserver
      */
     public function updated(Category $category)
     {
-        $image = $category->image()->first();
-        if($image){
-            $imageService = app()->make(\App\Services\Contract\ImageServiceInterface::class);
-            $imageService->remove($image)->path;
+        // $image = $category->image()->first();
+        // if($image){
+        //     $imageService = app()->make(\App\Services\Contract\ImageServiceInterface::class);
+        //     $imageService->remove($image)->path;
 
-        }
+        // }
         
        //dd($category);
     }
@@ -43,7 +43,13 @@ class CategoryObserver
      */
     public function deleted(Category $category)
     {
-        //
+        $image = $category->image()->first();
+        if($image){
+            $imageService = app()->make(\App\Services\Contract\ImageServiceInterface::class);
+            $imageService->remove($image->path);
+        }
+       
+        //dd($category);
     }
 
     /**

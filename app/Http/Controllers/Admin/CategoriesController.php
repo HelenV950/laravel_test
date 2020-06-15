@@ -20,7 +20,8 @@ class CategoriesController extends Controller
     public function index()
     {
 
-        $categories = Category::paginate(5);
+        $categories = Category::withCount('products')->paginate(5);
+       // dd($categories);
         return view('admin/categories/index', compact('categories'));
         // dd('hi!');
     }
@@ -47,8 +48,6 @@ class CategoriesController extends Controller
     {
         // $data = $request->request->all();
         //dd($request);
-        // $imageService = app()->make(\App\Services\Contract\ImageServiceInterface::class);
-        // $filePath = $imageService->upload($request->file('image'));
 
         // dd($filePath);
 
@@ -61,11 +60,8 @@ class CategoriesController extends Controller
             $imageService = app()->make(\App\Services\Contract\ImageServiceInterface::class);
             $filePath = $imageService->upload($request->file('image'));
             // dd($category->image()->first()->path);
-            $imageService->remove($category->image()->first()->path);
-            $newCategory->image()
-                ->create([
-                    'path' => $filePath
-                ]);
+
+            $newCategory->image()->create(['path' => $filePath]);
         }
 
 
@@ -95,7 +91,7 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        //dd($category->image()->first());
+        // dd($category->image()->first());
         $image = array();
         //dd($category->image()->exists());
         if ($category->image()->exists()) {
@@ -120,17 +116,25 @@ class CategoriesController extends Controller
             'description' => $request->get('description')
         ]);
 
+      
         if (!empty($request->file('image'))) {
-            $imageService = app()->make(\App\Services\Contract\ImageServiceInterface::class);
-            $filePath = $imageService->upload($request->file('image'));
+            $imageService   = app()->make(\App\Services\Contract\ImageServiceInterface::class);
+            $filePath       = $imageService->upload($request->file('image'));
+            $oldImage       = $category->image()->first();
 
+            if (!is_null($oldImage)) {
+                $imageService->remove($oldImage->path);
+            }
+    
             // $category->image()->delete();
-            $imageService->remove($category->image()->first()->path);
+            //$imageService->remove($category->image()->first()->path);
 
-            $category->image()
-                ->update([
-                    'path' => $filePath
-                ]);
+            if (is_null($oldImage)) {
+                $category->image()->create(['path' => $filePath]);
+            } else {
+                $category->image()->update(['path' => $filePath]);
+            }
+
 
             //dd($result);
         }
@@ -148,7 +152,7 @@ class CategoriesController extends Controller
     public function destroy(Category $category)
     {
         //dd($category->products());
-        
+
         $category->delete();
         $category->image()->delete();
 

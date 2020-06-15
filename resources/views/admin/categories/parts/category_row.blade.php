@@ -2,6 +2,7 @@
              <th scope="row">{{$category->id}}</th>
              <td>{{$category->title}}</td>
              <td>{{$category->shotDescription}}</td>
+             <td>{{$category->products_count}}</td>
              <td>
                <div style="display: flex; flex-direction: row; align-item: center; justify-conrent: center">
                 <a href="{{route('admin.categories.edit', $category)}}"

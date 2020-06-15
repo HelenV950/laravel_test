@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('SKU', 25)->unique();
             $table->string('name', 150);
             $table->text('description')->nullable();
-            $table->string('shot_description', 200)->nullable();
+            $table->string('shot_description')->nullable();
             $table->text('thumbnail');
             $table->float('price');
             $table->integer('discount')->default(0);

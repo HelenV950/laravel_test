@@ -16,7 +16,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'name' => $faker->unique()->sentence(rand(1, 5)),
         'description' => $faker->sentences(rand(5, 10), true),
         'shot_description' => $faker->text(200),
-        'thumbnail' => 'public/images/' . $faker->file(
+        'thumbnail' => 'images/' . $faker->file(
             Storage::disk('local')->path('public/seed-images'),
             Storage::disk('local')->path('public/images'),
             false

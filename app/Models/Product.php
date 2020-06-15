@@ -19,7 +19,7 @@ class Product extends Model
            
      ];
 
-     public function categories()
+     public function category()
      {
          return $this->belongsTo(\App\Models\Category::class);
      }
@@ -33,5 +33,12 @@ class Product extends Model
      public function image()
      {
          return $this->morphMany(\App\Models\Image::class, 'imageable');
+     }
+
+     public function getShotDescriptionAttribute()
+     {
+         $more = strlen($this->description) > 100 ? '...' : '';
+ 
+         return substr($this->description, 0, 100) . $more;
      }
 }

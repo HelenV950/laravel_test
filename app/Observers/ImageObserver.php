@@ -24,8 +24,8 @@ class ImageObserver
      * @return void
      */
     public function updated(Image $image)
-    {
-        //dd($image);
+     {
+    //     dd($image);
         $imageService = app()->make(\App\Services\Contract\ImageServiceInterface::class);
         $imageService->remove($image->path);
     }
