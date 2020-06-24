@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,14 +12,14 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
-     *
+     * @param Product $products
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
@@ -26,7 +27,7 @@ class HomeController extends Controller
         // dd(
         //     auth()->user()
         // );
-
-        return view('home');
+        $products = Product::all();
+        return view('layouts.index', ['products' => $products]);
     }
 }

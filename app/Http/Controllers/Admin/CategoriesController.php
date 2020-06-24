@@ -126,21 +126,16 @@ class CategoriesController extends Controller
                 $imageService->remove($oldImage->path);
             }
     
-            // $category->image()->delete();
-            //$imageService->remove($category->image()->first()->path);
-
             if (is_null($oldImage)) {
                 $category->image()->create(['path' => $filePath]);
             } else {
                 $category->image()->update(['path' => $filePath]);
             }
-
-
-            //dd($result);
+        
         }
 
         return redirect(route('admin.categories.index'))
-            ->with(['status' => 'The category was seccessfully updated!']);
+            ->with(['status' => 'The category was successfully updated!']);
     }
 
     /**

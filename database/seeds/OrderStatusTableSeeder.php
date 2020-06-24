@@ -14,11 +14,11 @@ class OrderStatusTableSeeder extends Seeder
         $statuses = config('order_status');
         if (!empty($statuses)) {
             foreach ($statuses as $status) {
-                $creatStatus[] = ['type' => $status];
+                $createStatus[] = ['type' => $status];
             }
 
-           // dd($creatStatus);
-            DB::table('orders_statuses')->insert($creatStatus);
+           // dd($createStatus);
+            DB::table('orders_statuses')->insert($createStatus);
         }
     }
 }

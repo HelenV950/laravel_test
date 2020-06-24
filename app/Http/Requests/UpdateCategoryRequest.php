@@ -23,7 +23,7 @@ class UpdateCategoryRequest extends FormRequest
         return [
             'title.required'        => 'A title is required',
             'description.required'  => 'A description is required',
-            'description.min'       => 'Lengs of description should be more than 10 characters'
+            'description.min'       => 'Length of description should be more than 10 characters'
 
         ];
     }

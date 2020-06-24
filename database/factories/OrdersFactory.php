@@ -4,6 +4,7 @@
 
 use App\Model;
 use App\Models\Order;
+use App\Models\User;
 use Faker\Generator as Faker;
 
 $factory->define(Order::class, function (Faker $faker) {
@@ -12,7 +13,7 @@ $factory->define(Order::class, function (Faker $faker) {
 
     return [
      
-        'user_id'       => $faker->unique()->randomNumber(5), 
+        'user_id'       => User::all()->random()->id,
         'user_name'     => $faker->firstName,
         'user_surname'  => $faker->LastName,
         'user_email'    => $faker->unique()->safeEmail,

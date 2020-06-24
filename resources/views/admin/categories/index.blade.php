@@ -6,7 +6,7 @@
         <div class="col-md-12">
             
             <div class="card">
-                <div class="card-header">Create Category</div>
+                <div class="card-header">Category List</div>
 
                 <div class="card-body">
                     <table class="table table-striped">

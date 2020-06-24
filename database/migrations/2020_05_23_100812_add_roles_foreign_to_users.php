@@ -34,7 +34,7 @@ class AddRolesForeignToUsers extends Migration
 
         Schema::table('users', function (Blueprint $table) {
             if (Schema::hasColumn('users', 'role_id')) {
-                $table->dropForeign('role_id');
+                $table->dropForeign(['role_id']);
             }
         });
     }

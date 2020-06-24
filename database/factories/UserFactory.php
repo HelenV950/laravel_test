@@ -19,19 +19,17 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
 
-$role = \App\Models\Role::where('name', '=', config('roles.customer'))->first();
-  
-   return [
-       'role_id' => $role->id,
+    $role = \App\Models\Role::where('name', '=', config('roles.customer'))->first();
+
+    return [
+        'role_id' => $role->id,
         'name' => $faker->firstName,
         'surname' => $faker->LastName,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
-        'password' => Hash::make($faker->password), // password, 
+        'password' => $faker->password, // password, 
         'birth_date' => $faker->dateTimeBetween('-50 years', '-18 years')->format('Y-m-d'),
         'phone' => $faker->phoneNumber,
         'remember_token' => Str::random(10),
     ];
- 
-    
 });

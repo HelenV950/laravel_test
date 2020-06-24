@@ -47,10 +47,10 @@ class CreateOrdersTable extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             if(Schema::hasColumn('orders', 'user_id')){
-                $table->dropForeign('user_id');
+                $table->dropForeign(['user_id']);
             }
             if(Schema::hasColumn('orders', 'status_id')){
-                $table->dropForeign('status_id');
+                $table->dropForeign(['status_id']);
             }
             
         });

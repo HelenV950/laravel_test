@@ -16,7 +16,7 @@ class OrdersTableSeeder extends Seeder
            $countOfProduct = rand(1,3);
            for($i = 0; $i < $countOfProduct; $i++){
               $quantity= rand(1,5);
-              $product = \App\Models\Product::all()->rand();
+              $product = \App\Models\Product::all()->random();
            }
            
             $product->orders()->updateExistingPivot($order, [

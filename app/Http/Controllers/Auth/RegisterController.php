@@ -30,6 +30,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo =   'admin/dashboard';
+    //protected $redirectTo =   'layouts.index';
 
     /**
      * Create a new controller instance.
@@ -49,14 +50,17 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+       // dd($data);  
+        
         return Validator::make($data, [
             'name'          => ['required', 'string', 'max:255'],
             'surname'       => ['required', 'string', 'max:255'],
             'email'         => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone'         => ['required', 'string', 'max:15', 'unique:users'],
-            'birth_date'    => ['required', 'data'],
+            'birth_date'    => ['required', 'date'],
             'password'      => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+      
     }
 
     /**
@@ -67,20 +71,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
-      
+        // dd($data);  
+        
         if (isset($data['_token'])) {
             unset($data['_token']);
         }
 
+        
        $data['role_id'] = \App\Models\Role::where(
-           'name', 
-           '=', 
-           config('roles.customer'))
+           'name', '=', config('roles.customer'))
            ->first()->id;
 
-         //dd($data);
-        return User::create($data);
+         
+       return User::create($data);
+       
+
+       
     
     }
 }

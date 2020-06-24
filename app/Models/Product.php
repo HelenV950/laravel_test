@@ -8,6 +8,7 @@ class Product extends Model
 {
     protected $fillable = [
         'id', 
+        'category_id',
         'SKU', 
         'name',
         'description', 
@@ -30,7 +31,7 @@ class Product extends Model
      }
 
         
-     public function image()
+     public function images()
      {
          return $this->morphMany(\App\Models\Image::class, 'imageable');
      }

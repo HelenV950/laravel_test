@@ -29,23 +29,47 @@ Route::get('/contact', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('ajax')->name('ajax.')->namespace('Ajax')->group(function () {
+    Route::delete('images/{image}/remove', 'ImagesController@remove')->name('image.remove');
+});
 
+Route::get('/', 'HomeController@index')->name('index');
+
+//*Shopping cart
+Route::get('/add-to-cart/{id}', 'CartController@getAddToCart')->name('product.addToCart');
+Route::middleware(['auth','user'])->group(function () {
+Route::get('/profile', 'ProfileController@index')->name('profile');  
+Route::get('/shopping-cart', 'CartController@getCart')->name('product.shoppingCart');
+Route::get('/checkout', 'CartController@getCheckout')->name('checkout');
+Route::post('/checkout', 'CartController@postCheckout')->name('checkout');
+Route::get('/add/{id}', 'CartController@getAddByOne')->name('product.addByOne');
+Route::get('/reduce/{id}', 'CartController@getReduceByOne')->name('product.reduceByOne');
+Route::get('/remove/{id}', 'CartController@getRemoveItem')->name('product.remove');
+});
+
+//* Mail
 Route::get('/send', 'MailController@send');
 
 
 
+// Route::middleware(['user', 'auth'])->prefix('user')->namespace('User')->name('user.')->group(function () {
+//     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+//     Route::get('/user.register', 'UsersController@index')->name('user.index');
+//     Route::post('/user.register', 'UsersController@create')->name('user.create');
+//});
+
 Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('/users', 'UsersController@index')->name('users');
 
 
     //*admin/products
-        // Route::prefix('products')->name('products.')->group(function(){
-        //     Route::get('/', 'ProductController@index')->name('index');
-        //     Route::post('/create', 'ProductController@create')->name('create');
-        //     Route::patch('/edit', 'ProductController@edit')->name('edit');
-        //     Route::delete('/delete', 'ProductController@delete')->name('destroy');
-        // });
+    // Route::prefix('products')->name('products.')->group(function(){
+    //     Route::get('/', 'ProductController@index')->name('index');
+    //     Route::post('/create', 'ProductController@create')->name('create');
+    //     Route::patch('/edit', 'ProductController@edit')->name('edit');
+    //     Route::delete('/delete', 'ProductController@delete')->name('destroy');
+    // });
     Route::resource('products', 'ProductsController')->except(['show']);
 
     //*admin/category

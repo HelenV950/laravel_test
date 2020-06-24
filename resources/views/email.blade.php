@@ -7,7 +7,7 @@ The body of your message.
 Button Text
 @endcomponent
 
-@component('mail::panel)
+@component('mail::panel')
 panel Text
 @endcomponent
 

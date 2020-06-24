@@ -67,7 +67,7 @@ class User extends Authenticatable
         $this->attributes['first_name'] = ucfirst($value);
     }
 
-    public function serPasswordAttribute($password)
+    public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = Hash::make($password);
     }
@@ -80,6 +80,11 @@ class User extends Authenticatable
     public function getIsAdminAttribute()
     {
        return $this->role->name === config('roles.admin');
+    }
+
+    public function getIsUserAttribute()
+    {
+       return $this->role->name === config('roles.customer');
     }
 }
 

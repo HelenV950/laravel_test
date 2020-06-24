@@ -6,7 +6,7 @@
         <div class="col-md-6">
            
             <div class="card">
-                <div class="card-header">Create Category</div>
+                <div class="card-header">Update Category</div>
 
                 <div class="card-body">
 
@@ -33,7 +33,7 @@
                               type="text" 
                               class="form-control @error('title') is-invalid @enderror" 
                               name="title" 
-                              value="{{$category->tite ?? ''}}" 
+                              value="{{$category->title ?? ''}}" 
                               required 
                               autofocus>
 
