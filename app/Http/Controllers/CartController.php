@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\OrderStatus;
 use App\Models\Product;
 use App\Models\User;
 use COM;
@@ -36,7 +37,7 @@ class CartController extends Controller
         $cart->addByOne($id);
 
         Session::put('cart', $cart);
-        
+
         return redirect()->route('product.shoppingCart');
     }
 
@@ -92,7 +93,7 @@ class CartController extends Controller
 
     public function getCheckout()
     {
-        
+
         if (!Session::has('cart')) {
             return view('shop.shopping-cart', ['products' => null])
                 ->with(['status' => 'The cart is empty']);
@@ -100,13 +101,14 @@ class CartController extends Controller
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         $total = $cart->totalPrice;
-           
+
         $user = Auth::user();
-        //dd($user);
+
+        //dd($user->id);
         return view('shop.checkout', ['total' => $total, 'user' => $user]);
     }
 
-    public function postCheckout(Request $request, Order $order)
+    public function create(Request $request, Order $order, User $user)
     {
         if (!Session::has('cart')) {
             return redirect()->route('shop.shoppingCart')
@@ -114,26 +116,27 @@ class CartController extends Controller
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
+        $total = $cart->totalPrice;
         $user = Auth::user();
 
-        $order = new Order(); 
+        $order_status = OrderStatus::where('type', '=', 'Paid')->first();
+  
         $order->cart = serialize($cart);
-             $order->create([
-            $order->user_id = Auth::user()->id,
-            $order->user_name = $request->input('user_name'),
-            $order->user_surname = $request->input('user_surname'),
-            $order->user_email = $request->input('user_email'),
-            $order->user_phone = $request->input('user_phone'),
-            $order->country = $request->input('country'),
-            $order->city = $request->input('city'),
-            $order->address = $request->input('address'),
-            $order->total = $request->input('total'),
-            $order->status_id = config('order_status.paid')
-    
+     
+        $order->create([
+            'user_id' => $user->id,
+            'user_name' => $request->input('user_name'),
+            'user_surname' => $request->input('user_surname'),
+            'user_email' => $request->input('user_email'),
+            'user_phone' => $request->input('user_phone'),
+            'country' => $request->input('country'),
+            'city' => $request->input('city'),
+            'address' => $request->input('address'),
+            'total' => $total,
+            'status_id' => $order_status->id
         ]);
 
-        
-        dd($order);
+        //dd($order);
         Session::forget('cart');
         return redirect()->route('index')->with(['success' => 'Successfully purchased products!']);
     }

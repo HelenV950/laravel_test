@@ -16,9 +16,14 @@ Checkout
         {{Session::get('error')}}
         </div>
 
-        <form action="{{route('checkout')}}" method="POST" id="checkout-form">
-          
-       
+        <form action="{{route('order.create')}}" method="POST" id="checkout-form">
+{{--           
+          <div class="hidden">
+            <div class="form-group">
+              <label for="user_id">id</label>
+               <input type="text" id="user_id" name="user_id" class="form-control" value="{{ $user->id ?? '' }}" required>
+            </div>
+          </div> --}}
           <div class="">
             <div class="form-group">
               <label for="user_name">Name</label>
@@ -64,7 +69,7 @@ Checkout
             </div>
           </div>
           <hr>
-         <div class="">
+         {{-- <div class="">
             <div class="form-group">
               <label for="card-name">Card Holder Name</label>
               <input type="text" id="card-name" class="form-control" >
@@ -97,14 +102,14 @@ Checkout
               <label for="card-cvc">CVC</label>
               <input type="text" id="card-cvc" class="form-control" >
             </div>
-          </div> 
-          <div class="">
+          </div>  --}}
+          {{-- <div class="">
             <div class="form-group">
               <label for="card-cvc">total</label>
               <input type="text" id="total" name="total" class="form-control" value="{{$total}}">
             </div>
           </div>
-       
+        --}}
         @csrf
         <button type="submit" class="btn btn-success">Buy now</button>
      

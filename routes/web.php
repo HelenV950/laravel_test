@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,10 +42,14 @@ Route::middleware(['auth','user'])->group(function () {
 Route::get('/profile', 'ProfileController@index')->name('profile');  
 Route::get('/shopping-cart', 'CartController@getCart')->name('product.shoppingCart');
 Route::get('/checkout', 'CartController@getCheckout')->name('checkout');
-Route::post('/checkout', 'CartController@postCheckout')->name('checkout');
+Route::post('/checkout', 'CartController@create')->name('order.create');
 Route::get('/add/{id}', 'CartController@getAddByOne')->name('product.addByOne');
 Route::get('/reduce/{id}', 'CartController@getReduceByOne')->name('product.reduceByOne');
 Route::get('/remove/{id}', 'CartController@getRemoveItem')->name('product.remove');
+
+Route::get('/order', 'OrderController@getOrderByUser')->name('user.order');
+//Route::get('/order', 'User\UserController@getOrder')->prefix('user')->name('user.order');
+
 });
 
 //* Mail

@@ -84,6 +84,9 @@
                                     <a class="dropdown-item" href="{{ route('profile') }}">
                                         {{ __('My Profile') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('user.order') }}">
+                                        {{ __('My Orders') }}
+                                    </a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
