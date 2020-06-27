@@ -85,7 +85,10 @@ crossorigin="anonymous"></script>
                               
                                <a class="dropdown-item" href="{{ route('admin.users') }}" >
                                     {{ __('Users List') }}
-                                </a> 
+                               </a> 
+                               <a class="dropdown-item" href="{{ route('admin.users.orders') }}" >
+                                    {{ __('Users Orders') }}
+                               </a> 
                                
 
                             

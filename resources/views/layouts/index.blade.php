@@ -20,6 +20,7 @@
           <div class="card-body">
             <h5 class="card-title">{{$product->name}}</h5>
             <p class="card-text">{{$product->shot_description}}.</p>
+            {{-- <p class="card-text">{{$product->category()->title()}}</p> --}}
               <div class="clearfix">
                 <div class="price">${{$product->price}}</div>
                 <a href="{{route('product.addToCart', ['id' => $product->id])}}" class="btn btn-primary pull-right">Add to Cart </a>

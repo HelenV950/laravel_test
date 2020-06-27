@@ -18,11 +18,12 @@ class OrdersTableSeeder extends Seeder
               $quantity= rand(1,5);
               $product = \App\Models\Product::all()->random();
            }
-           
-            $product->orders()->updateExistingPivot($order, [
+        
+            $product->orders()->save($order, [
                 'quantity' => $quantity,
-                'price' => $product->price
-            ]);
+                'price' => $product->price,
+                
+           ]);
         });
     }
 }

@@ -10,21 +10,13 @@ use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+  
 
     public function getOrderByUser()
     {
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        //dd($cart);
+      
        // $order = new Order();
 
         $orders = Auth::user()->orders;
@@ -32,7 +24,7 @@ class OrderController extends Controller
             $order->cart = unserialize($order->cart);
             return $order;
         }); 
-       // dd($orders);
+       //dd($orders->cart);
         return view('user/orders', ['orders' => $orders]);
         
     }

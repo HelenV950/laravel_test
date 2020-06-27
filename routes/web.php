@@ -39,7 +39,9 @@ Route::get('/', 'HomeController@index')->name('index');
 //*Shopping cart
 Route::get('/add-to-cart/{id}', 'CartController@getAddToCart')->name('product.addToCart');
 Route::middleware(['auth','user'])->group(function () {
-Route::get('/profile', 'ProfileController@index')->name('profile');  
+Route::get('user/profile', 'ProfileController@index')->name('user.profile');  
+Route::get('user/profile/edit', 'ProfileController@edit')->name('user.profile.edit');  
+Route::post('user/profile/update', 'ProfileController@update')->name('user.profile.update');  
 Route::get('/shopping-cart', 'CartController@getCart')->name('product.shoppingCart');
 Route::get('/checkout', 'CartController@getCheckout')->name('checkout');
 Route::post('/checkout', 'CartController@create')->name('order.create');
@@ -48,6 +50,7 @@ Route::get('/reduce/{id}', 'CartController@getReduceByOne')->name('product.reduc
 Route::get('/remove/{id}', 'CartController@getRemoveItem')->name('product.remove');
 
 Route::get('/order', 'OrderController@getOrderByUser')->name('user.order');
+
 //Route::get('/order', 'User\UserController@getOrder')->prefix('user')->name('user.order');
 
 });
@@ -66,6 +69,7 @@ Route::get('/send', 'MailController@send');
 Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('/users', 'UsersController@index')->name('users');
+    Route::get('/orders', 'UsersController@getOrders')->name('users.orders');
 
 
     //*admin/products

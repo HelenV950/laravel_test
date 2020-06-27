@@ -135,22 +135,7 @@ class ProductsController extends Controller
             }
         }
       
-        // if (!empty($request->file('thumbnail'))) {
-        //     $imageService   = app()->make(\App\Services\Contract\ImageServiceInterface::class);
-        //     $filePath       = $imageService->upload($request->file('thumbnail'));
-        //     $oldThumbnail   = $product->thumbnail()->first();
-
-        //     if (!is_null($oldThumbnail)) {
-        //         $imageService->remove($oldThumbnail->path);
-        //     }
-    
-        //     if (is_null($oldThumbnail)) {
-        //         $product->thumbnail()->create(['path' => $filePath]);
-        //     } else {
-        //         $product->thumbnail()->update(['path' => $filePath]);
-        //     }
-        
-        // }
+      
 
         return redirect(route('admin.products.index'))
             ->with(['status' => 'The product was successfully updated!']);

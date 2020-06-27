@@ -8,7 +8,7 @@
 
 <h2>My orders</h2>
 <?php
-//dd($orders);
+dd($oldCart);
 
 ?>
 @foreach($orders as $order)
@@ -16,19 +16,19 @@
     <div class="panel-body">
         <ul class="list-group">
 
-            {{-- @foreach($order->cart->items as $item)
+          @foreach($order->cart->items as $item)
             <li class="list-group-item">
                 <span class="badge">{{$item['price']}}</span>
                 {{$item['item']['title']}} | {{$item['item']['qty']}} Units
             </li>
             @endforeach 
 
-         --}}
+         
       
         </ul>
     </div>
     <div class="panel-footer">
-        {{-- <strong>Total Price: ${{$order->cart->totalPrice}}</strong> --}}
+         <strong>Total Price: ${{$order->cart->totalPrice}}</strong> 
     </div>
 </div> 
 @endforeach

@@ -54,9 +54,12 @@
                         </li>
 
                         <li class="nav-item">
+                            {{-- @if(auth()->user()->IsUser) --}}
                             <a class="nav-link" href="{{route('product.shoppingCart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                {{-- @endif  --}}
                             <span class="badge badge-pill badge-secondary">{{Session::has('cart') ? Session::get('cart')->totalQty : ''}}</span>
                             </a>
+                            
                         </li>
 
                         @guest
@@ -81,7 +84,7 @@
                                     </a>
                                     @endif
                                     @if(auth()->user()->IsUser)
-                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                    <a class="dropdown-item" href="{{ route('user.profile') }}">
                                         {{ __('My Profile') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('user.order') }}">

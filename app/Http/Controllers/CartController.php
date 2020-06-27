@@ -108,7 +108,7 @@ class CartController extends Controller
         return view('shop.checkout', ['total' => $total, 'user' => $user]);
     }
 
-    public function create(Request $request, Order $order, User $user)
+    public function create(Request $request, Order $order, User $user, Product $product)
     {
         if (!Session::has('cart')) {
             return redirect()->route('shop.shoppingCart')
@@ -122,7 +122,8 @@ class CartController extends Controller
         $order_status = OrderStatus::where('type', '=', 'Paid')->first();
   
         $order->cart = serialize($cart);
-     
+
+    // dd($order->cart['qty']);
         $order->create([
             'user_id' => $user->id,
             'user_name' => $request->input('user_name'),
@@ -136,7 +137,10 @@ class CartController extends Controller
             'status_id' => $order_status->id
         ]);
 
-        //dd($order);
+    
+            
+    
+        //dd($cart);
         Session::forget('cart');
         return redirect()->route('index')->with(['success' => 'Successfully purchased products!']);
     }

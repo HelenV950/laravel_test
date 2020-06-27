@@ -7,39 +7,42 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-        'id', 
+        'id',
         'category_id',
-        'SKU', 
+        'SKU',
         'name',
-        'description', 
-        'shot_description', 
-        'price', 
+        'description',
+        'shot_description',
+        'price',
         'discount',
         'quantity',
         'thumbnail'
-           
-     ];
 
-     public function category()
-     {
-         return $this->belongsTo(\App\Models\Category::class);
-     }
+    ];
 
-     public function orders()
-     {
-         return $this->belongsToMany(\App\Models\Order::class)->withPivot('quantity', 'price');
-     }
+    public function category()
+    {
+        return $this->belongsTo(\App\Models\Category::class);
+    }
 
-        
-     public function images()
-     {
-         return $this->morphMany(\App\Models\Image::class, 'imageable');
-     }
+    public function orders()
+    {
+       
+        return $this->belongsToMany(\App\Models\Order::class)
+            ->withPivot('quantity', 'price')
+            ->withTimestamps();
+    }
 
-     public function getShotDescriptionAttribute()
-     {
-         $more = strlen($this->description) > 100 ? '...' : '';
- 
-         return substr($this->description, 0, 100) . $more;
-     }
+
+    public function images()
+    {
+        return $this->morphMany(\App\Models\Image::class, 'imageable');
+    }
+
+    public function getShotDescriptionAttribute()
+    {
+        $more = strlen($this->description) > 100 ? '...' : '';
+
+        return substr($this->description, 0, 100) . $more;
+    }
 }

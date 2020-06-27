@@ -19,6 +19,7 @@ class CreateOrderProductTable extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('quantity');
             $table->float('price');
+            $table->timestamps();
             
             $table->foreign('order_id')
             ->references('id')
