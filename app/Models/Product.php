@@ -83,6 +83,6 @@ class Product extends Model implements Buyable
            ['rateable_id', $this->id] 
         ])->first();
 
-        return !is_null($vote->rating) ? $vote->rating : false;
+        return !empty($vote->rating) ? $vote->rating : false;
     }
 }

@@ -33,14 +33,15 @@
       <p>Price: <strong>${{$product->printPrice()}}</strong></p>
       <p>SKU: {{$product->SKU}}</p>
       <p>Quantity {{$product->quantity}}</p>
-      @if($product->usersRated() > 0)
-      <p>Rating: {{round($product->averageRating(), 1) ?? 0}} /5 ({{$product->usersRated()}})</p>
-      @endif
-    <hr>
-    <div class="">
-      <p>Product Categories</p>
-      @include('shop.category-view', ['category'=>$product->category()->first()])
-    </div>
+
+          {{-- @if($product->usersRated() > 0) --}}
+          <p>Rating: {{round($product->averageRating(), 1) ?? 0}} /5 ({{$product->usersRated()}})</p>
+          {{-- @endif --}}
+        <hr>
+        <div class="">
+          <p>Product Categories</p>
+          @include('shop.category-view', ['category'=>$product->category()->first()])
+        </div>
 
       {{-- @auth --}}
       @if($product->quantity > 0)
