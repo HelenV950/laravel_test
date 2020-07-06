@@ -7,45 +7,52 @@ Checkout
 
 @section('content')
 <div class="container">
-  <div class="row">
-    <div class="col-md-8">
-        <h1>Checkout</h1>
-        <h4>Your Total: ${{$total}}</h4>
+  <h1 class="text-center">Checkout</h1>
+  <div class="row justify-content-space-between">
+    <div class="col-md-6">
+    
 
-        <div id="charge-error" class="alert alert-danger" {{!Session::has('error') ? 'hidden' : ''}}>
+      {{-- <h4>Your Total: $ {{Cart::total()}}</h4>   --}}
+
+        {{-- <div id="charge-error" class="alert alert-danger" {{!Session::has('error') ? 'hidden' : ''}}>
         {{Session::get('error')}}
+        </div> --}}
+        @if($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+            @endforeach
+          </ul>
         </div>
+        @endif
+     
 
         <form action="{{route('order.create')}}" method="POST" id="checkout-form">
-{{--           
-          <div class="hidden">
-            <div class="form-group">
-              <label for="user_id">id</label>
-               <input type="text" id="user_id" name="user_id" class="form-control" value="{{ $user->id ?? '' }}" required>
-            </div>
-          </div> --}}
+          @csrf
+               
           <div class="">
             <div class="form-group">
               <label for="user_name">Name</label>
-               <input type="text" id="user_name" name="user_name" class="form-control" value="{{ $user->name ?? '' }}" required>
+               <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ Auth()->user()->name }}" autocomplete="name" autofocus>
             </div>
           </div>
           <div class="">
             <div class="form-group">
               <label for="user_surname">Surname</label>
-              <input type="text" id="user_surname" name="user_surname" class="form-control" value="{{ $user->surname ?? '' }}" required>
+              <input type="text" id="surname" name="surname" class="form-control @error('surname') is-invalid @enderror" value="{{ Auth()->user()->surname  }}" autocomplete="surname" autofocus>
             </div>
           </div>
           <div class="">
             <div class="form-group">
               <label for="user_email">Email</label>
-              <input type="text" id="user_email" name="user_email" class="form-control" value="{{ $user->email ?? '' }}" required>
+              <input type="text" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ Auth()->user()->email  }}" autocomplete="email" autofocus>
             </div>
           </div>
           <div class="">
             <div class="form-group">
               <label for="user_phone">Phone</label>
-              <input type="text" id="user_phone" name="user_phone" class="form-control" value="{{ $user->phone ?? '' }}" required>
+              <input type="text" id="phone" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ Auth()->user()->phone }}">
             </div>
           </div>
        
@@ -53,19 +60,19 @@ Checkout
           <div class="">
             <div class="form-group">
               <label for="country">Country</label>
-              <input type="text" id="country" name="country" class="form-control" required>
+              <input type="text" id="country" name="country" class="form-control @error('country') is-invalid @enderror" required>
             </div>
           </div>
           <div class="">
             <div class="form-group">
               <label for="city">City</label>
-              <input type="text" id="city" name="city" class="form-control" required>
+              <input type="text" id="city" name="city" class="form-control @error('city') is-invalid @enderror" required>
             </div>
           </div>
           <div class="">
             <div class="form-group">
               <label for="addres">Address</label>
-              <input type="text" id="address" name="address" class="form-control" required>
+              <input type="text" id="address" name="address" class="form-control @error('address') is-invalid @enderror" required>
             </div>
           </div>
           <hr>
@@ -114,7 +121,31 @@ Checkout
         <button type="submit" class="btn btn-success">Buy now</button>
      
         </form>
-    </div>
+      </div>
+
+      <div class="col"></div>
+
+<div class="col-md-5">
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+       <th>Product</th >
+       <th>Qty</th>
+       <th>Price</th>
+       <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      @each('shop.cart.parts.checkout_view', Cart::instance('cart')->content(), 'row')
+    </tbody>
+ </table>
+ <div class="row-right">
+<strong>Total {{Cart::total()}}</strong>
+  </div>
+
+</div>
+
+   
   </div>
 </div>
 

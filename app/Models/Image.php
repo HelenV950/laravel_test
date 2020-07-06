@@ -38,11 +38,9 @@ class Image extends Model
 
 
 
-    //public function setPathAttribute($filePath)
-    //{
-
-       //dd($filePath); 
-       //$this->path = $filePath; 
-    //}
-
+    // public function setPathAttribute(UploadedFile $file)
+    // {
+    //     $imageService   = app()->make(\App\Services\Contract\ImageServiceInterface::class);
+    //     $this->path = $imageService->upload($file);
+    // }
 }

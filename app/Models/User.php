@@ -17,15 +17,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-       'id', 
-       'role_id',
-       'name', 
-       'surname',
-       'email', 
-       'phone', 
-       'password', 
-       'birth_date'
-   
+        'id',
+        'role_id',
+        'balance',
+        'name',
+        'surname',
+        'email',
+        'phone',
+        'password',
+        'birth_date'
+
     ];
 
     /**
@@ -56,13 +57,27 @@ class User extends Authenticatable
         return $this->hasMany(\App\Models\Order::class);
     }
 
-    
+
     public function image()
     {
         return $this->morphOne(\App\Models\Image::class, 'imageable');
     }
-//мутаторы
-    public function setFirstNameAtribute($value)
+
+    public function instanceCartName()
+    {
+        $userName = [
+            $this->id,
+            $this->name,
+            $this->surname
+        ];
+
+        return implode('_', $userName);
+    }
+
+
+
+    //мутаторы
+    public function setFirstNameAttribute($value)
     {
         $this->attributes['first_name'] = ucfirst($value);
     }
@@ -79,14 +94,11 @@ class User extends Authenticatable
 
     public function getIsAdminAttribute()
     {
-       return $this->role->name === config('roles.admin');
+        return $this->role->name === config('roles.admin');
     }
 
     public function getIsUserAttribute()
     {
-       return $this->role->name === config('roles.customer');
+        return $this->role->name === config('roles.customer');
     }
 }
-
-
-

@@ -29,7 +29,7 @@
 </head>
 <body>
     <div id="app">
-@section('navbar')
+        @section('navbar')
 
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -55,9 +55,11 @@
 
                         <li class="nav-item">
                             {{-- @if(auth()->user()->IsUser) --}}
-                            <a class="nav-link" href="{{route('product.shoppingCart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <a class="nav-link" href="{{route('cart.index')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 {{-- @endif  --}}
-                            <span class="badge badge-pill badge-secondary">{{Session::has('cart') ? Session::get('cart')->totalQty : ''}}</span>
+                                @if(Cart::instance('cart')->count() > 0)
+                            <span class="badge badge-pill badge-secondary">{{Cart::instance('cart')->count()}}</span>
+                            @endif
                             </a>
                             
                         </li>
@@ -112,8 +114,35 @@
                 </div>
             </div>
         </nav>
-        @show
+      
 
+       <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <div class="container">
+      <div class="collapse navbar-collapse  d-flex justify-content-end" id="navbarNavDropdown">
+       
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Shop
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="{{route('shop')}}">All products</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      
+      </ul>
+    </div>
+  </nav>
+</div>
+@show
         @if(session('status'))
         <div class="alert alert-success">
             {{session('status')}}

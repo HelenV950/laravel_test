@@ -17,37 +17,64 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
-
 Route::get('/about', function () {
     return view('about');
 });
-
 Route::get('/contact', function () {
     return view('contact');
 });
-
-
-
 Auth::routes();
 
 Route::prefix('ajax')->name('ajax.')->namespace('Ajax')->group(function () {
     Route::delete('images/{image}/remove', 'ImagesController@remove')->name('image.remove');
 });
 
+
+
+Route::get('category/{category}', 'CategoryController@show')->name('category.show');
+Route::get('category/', 'CategoryController@index')->name('category.index');
+
+
+
+Route::resource('product', 'ProductController');
+Route::get('product/{product}', "ProductController@show")->name('product.show');
+Route::get('product', "ProductController@index")->name('product.index');
+
+
+Route::get('/shop', 'ShopController@index')->name('shop');
+//Route::resource('category', 'CategoryController');
+
+
+
+
+
 Route::get('/', 'HomeController@index')->name('index');
 
+
+
 //*Shopping cart
-Route::get('/add-to-cart/{id}', 'CartController@getAddToCart')->name('product.addToCart');
+Route::get('/cart', 'CartController@index')->name('cart.index');
+
+Route::post('/cart/{product}/add', 'CartController@add')->name('cart.add');
+Route::post('/cart/{product}/count/update', 'CartController@update')->name('cart.count.update');
+Route::delete('/cart/{product}/delete', 'CartController@delete')->name('cart.delete');
+//Route::get('/add-to-cart/{id}', 'CartController@getAddToCart')->name('product.addToCart');
+
 Route::middleware(['auth','user'])->group(function () {
 Route::get('user/profile', 'ProfileController@index')->name('user.profile');  
 Route::get('user/profile/edit', 'ProfileController@edit')->name('user.profile.edit');  
 Route::post('user/profile/update', 'ProfileController@update')->name('user.profile.update');  
-Route::get('/shopping-cart', 'CartController@getCart')->name('product.shoppingCart');
-Route::get('/checkout', 'CartController@getCheckout')->name('checkout');
-Route::post('/checkout', 'CartController@create')->name('order.create');
+//Route::get('/shopping-cart', 'CartController@getCart')->name('product.shoppingCart');
+
+Route::get('/checkout', 'CheckoutController')->name('checkout');
+Route::post('/order/create', 'OrderController@create')->name('order.create');
+Route::get('/thankyou/{order}', function($order){
+    return view('shop.checkout.thankyou', compact('order'));
+})->name('thankyou');
+
 Route::get('/add/{id}', 'CartController@getAddByOne')->name('product.addByOne');
 Route::get('/reduce/{id}', 'CartController@getReduceByOne')->name('product.reduceByOne');
-Route::get('/remove/{id}', 'CartController@getRemoveItem')->name('product.remove');
+//Route::get('/remove/{id}', 'CartController@getRemoveItem')->name('product.remove');
 
 Route::get('/order', 'OrderController@getOrderByUser')->name('user.order');
 

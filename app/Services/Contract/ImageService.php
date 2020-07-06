@@ -14,10 +14,11 @@ class ImageService implements ImageServiceInterface
 {
   public function upload(UploadedFile $file)
   {
-    $imagePath =  implode('/', str_split(Str::random(8), 2))
+
+    $imagePath = implode('/', str_split(Str::random(8), 2))
       . '/' . Str::random(16) . '_' . time() . '.' . $file->getClientOriginalExtension();
-    // dd($imagePath);
-    // dd($file);
+    ($imagePath);
+    //dd($imagePath);
 
     Storage::put(
       'public/' .

@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
+ {{-- {{Storage::disk('public')->url($image['path'])}}  --}}
+ {{-- {{ asset('storage/j7/B8/ca/oP/yVSE65Rl3CALJIUt_1593845599.jpg')}} --}}
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -85,10 +88,6 @@
                       </div>
 
                 
-
-
-
-
 
                       <div class="form-group row mb-0">
                           <div class="col-md-8 offset-md-4">

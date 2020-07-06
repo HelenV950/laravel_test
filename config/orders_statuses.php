@@ -2,6 +2,6 @@
 
 return [
   'paid'        => 'Paid',
-  'in process'  => 'In process',
+  'in_process'  => 'In_process',
   'shipped'     => 'Shipped'
 ];

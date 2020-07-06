@@ -2,10 +2,16 @@
 
 namespace App\Models;
 
+use Gloudemans\Shoppingcart\CanBeBought;
+use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+
+class Product extends Model implements Buyable
 {
+
+    use CanBeBought;
+
     protected $fillable = [
         'id',
         'category_id',
@@ -27,8 +33,8 @@ class Product extends Model
 
     public function orders()
     {
-       
-        return $this->belongsToMany(\App\Models\Order::class)
+
+        return $this->belongsToMany(\App\Models\Order::class, 'order_product', 'order_id', 'product_id')
             ->withPivot('quantity', 'price')
             ->withTimestamps();
     }
@@ -39,10 +45,30 @@ class Product extends Model
         return $this->morphMany(\App\Models\Image::class, 'imageable');
     }
 
+
     public function getShotDescriptionAttribute()
     {
         $more = strlen($this->description) > 100 ? '...' : '';
 
         return substr($this->description, 0, 100) . $more;
+    }
+
+
+    public function printPrice()
+    {
+        $price = $this->price;
+
+        if ($this->discount > 0) {
+            $price -= ($price / 100 * $this->discount);
+        }
+
+        return round($price, 2);
+    }
+
+    public function getPrice()
+    {
+      return  $this->printPrice();
+
+        
     }
 }

@@ -2,31 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateOrderRequest;
 use App\Models\Order;
-use App\Models\Cart;
+
+use App\Models\OrderStatus;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
-  
+
 
     public function getOrderByUser()
     {
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
-      
-       // $order = new Order();
-
-        $orders = Auth::user()->orders;
-        $orders->transform(function($order, $key){
-            $order->cart = unserialize($order->cart);
-            return $order;
-        }); 
-       //dd($orders->cart);
-        return view('user/orders', ['orders' => $orders]);
         
+        $orders = Auth::user()->orders;
+        $cartItem = Cart::instance('cart')->content();
+        // $products = Order::find(1)->products;
+        // foreach($orders as $order){
+
+     // dd($products);
+        //     dd($order->products()->attach($order,[
+        //        'quantity' => $quantity,
+        //         'price' => $product->price,
+        //     ]
+        // ));
+              
+
+
+       // }
+       // $order = Order::all();
+     
+        // $orders->transform(function($order, $key){
+        //     $order->cart = unserialize($order->cart);
+        //     return $order;
+        // }); 
+       
+
+        return view('user/orders', ['orders' => $orders]);
+
     }
 
     /**
@@ -34,9 +50,53 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(CreateOrderRequest $request)
     {
-        //
+        $user = auth()->user();
+        $cartTotal = (float) Cart::instance('cart')->total(2, '.', '');
+        $cartItem = Cart::instance('cart')->content();
+
+        dd($cartItem);
+
+        if($cartTotal > auth()->user()->balance){
+            return redirect()->back()->with(['customError'=>'You don`t have enough money on your balance']);
+        }
+
+        $fields = $request->validated();
+        $status = OrderStatus::where('type', '=', config('orders_statuses.in_process'))->first();
+
+        
+
+        $order  = Order::create([
+            'user_id'      => $user->id,
+            'user_name'    => $fields['name'],
+            'user_surname' => $fields['surname'],
+            'user_email'   => $fields['email'],
+            'user_phone'   => $fields['phone'],
+            'country'      => $fields['country'],
+            'city'         => $fields['city'],
+            'address'      => $fields['address'],
+            'total'        => $cartTotal,
+            'status_id'    => $status->id
+
+        ]);
+
+        $user->update([
+           'balance' => $user->balance - $cartTotal 
+        ]);
+
+       foreach ($cartItem as $item) {
+          $order->products()->attach($item->id, [
+              'quantity'   => (int) $item->qty,
+              'price'      => $item->price
+
+
+          ]);
+       }
+
+        Cart::instance('cart')->destroy();
+        //dd($user);
+        return redirect()->route('thankyou', compact('order'));
     }
 
     /**

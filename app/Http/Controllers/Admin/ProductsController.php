@@ -43,7 +43,7 @@ class ProductsController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
-       // dd($request->file('product_images'));
+        //dd($request->file('product_images'));
         $product = $request->all();
 
        // dd($request);
@@ -92,8 +92,8 @@ class ProductsController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all()->toArray();
-        //$images = $product->images;
-        //dd($images);
+        $images = $product->images;
+       // dd($images);
         return view('admin/products/edit', compact('categories', 'product'));
     }
 

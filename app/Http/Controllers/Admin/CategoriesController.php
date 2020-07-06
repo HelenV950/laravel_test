@@ -46,10 +46,7 @@ class CategoriesController extends Controller
      */
     public function store(CreateCategoryRequest $request, Category $category)
     {
-        // $data = $request->request->all();
-        //dd($request);
-
-        // dd($filePath);
+      
 
         $newCategory = $category->create([
             'title' => $request->get('title'),
@@ -59,7 +56,7 @@ class CategoriesController extends Controller
         if (!empty($request->file('image'))) {
             $imageService = app()->make(\App\Services\Contract\ImageServiceInterface::class);
             $filePath = $imageService->upload($request->file('image'));
-            // dd($category->image()->first()->path);
+          
 
             $newCategory->image()->create(['path' => $filePath]);
         }
@@ -91,13 +88,13 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        // dd($category->image()->first());
+        //dd($category->image()->first());
         $image = array();
         //dd($category->image()->exists());
         if ($category->image()->exists()) {
             $image = $category->image()->first()->toArray();
         }
-        //dd($image);
+       // dd($image);
         return view('admin/categories/edit', compact('category',  'image'));
     }
 
@@ -148,10 +145,15 @@ class CategoriesController extends Controller
     {
         //dd($category->products());
 
+        //*delete products with category
+        // if($category->products()->exists()){
+        //     $category->products()->delete();
+        // }
+
         $category->delete();
         $category->image()->delete();
 
         return redirect(route('admin.categories.index'))
-            ->with(['status' => 'The category was seccessfully removed!']);
+            ->with(['status' => 'The category was successfully removed!']);
     }
 }

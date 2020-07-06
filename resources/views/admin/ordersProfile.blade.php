@@ -36,7 +36,7 @@
         <td>{{$order->city}}</td>
         <td>{{$order->address}}</td>
         <td>{{$order->total}}</td>
-        <td>{{$order->status}}</td>
+        <td>{{$order->status['type']}}</td>
       </tr>
      @endforeach
     </tbody>

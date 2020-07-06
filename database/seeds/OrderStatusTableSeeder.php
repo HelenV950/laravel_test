@@ -11,7 +11,7 @@ class OrderStatusTableSeeder extends Seeder
      */
     public function run()
     {
-        $statuses = config('order_status');
+        $statuses = config('orders_statuses');
         if (!empty($statuses)) {
             foreach ($statuses as $status) {
                 $createStatus[] = ['type' => $status];

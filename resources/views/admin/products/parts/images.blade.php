@@ -1,7 +1,7 @@
  <div class="container">
  <div class="form-group row "> 
    <div class="col-12 product-images-wrapper" style="padding: 5px; border: 1px solid #eee;">
-    
+   
       @if(!empty($product->images))
         @foreach($product->images as $image)
      

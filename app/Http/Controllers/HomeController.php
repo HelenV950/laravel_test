@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -24,10 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // dd(
-        //     auth()->user()
-        // );
-        $products = Product::all();
-        return view('layouts.index', ['products' => $products]);
+      
+        $products = Product::inRandomOrder()->take(3)->get();
+        //$products = Product::with('category')->where('quantity', '>', '0')->paginate(10);
+        $categories = Category::all();
+        return view('home.index', compact('categories', 'products'));
     }
 }

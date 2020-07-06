@@ -21,6 +21,16 @@ class EventServiceProvider extends ServiceProvider
     ];
 
     /**
+     * The event listener mappings for the application.
+     *
+     * @var array
+     */
+    protected $subscribe = [
+       "App\Listeners\UserEventSubscriber",
+    ];
+    
+
+    /**
      * Register any events for your application.
      *
      * @return void

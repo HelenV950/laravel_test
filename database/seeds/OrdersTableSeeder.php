@@ -19,7 +19,7 @@ class OrdersTableSeeder extends Seeder
               $product = \App\Models\Product::all()->random();
            }
         
-            $product->orders()->save($order, [
+            $order->products()->attach($order, [
                 'quantity' => $quantity,
                 'price' => $product->price,
                 
