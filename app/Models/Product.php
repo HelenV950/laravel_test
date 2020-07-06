@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Gloudemans\Shoppingcart\CanBeBought;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
+use willvincent\Rateable\Rateable;
 use Illuminate\Database\Eloquent\Model;
 
 
 class Product extends Model implements Buyable
 {
 
-    use CanBeBought;
+    use CanBeBought, Rateable;
+    
 
     protected $fillable = [
         'id',
@@ -68,7 +70,19 @@ class Product extends Model implements Buyable
     public function getPrice()
     {
       return  $this->printPrice();
-
         
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserProductRating()
+    {
+         $vote = $this->ratings()->where([
+           ['user_id', auth()->id()],
+           ['rateable_id', $this->id] 
+        ])->first();
+
+        return !is_null($vote->rating) ? $vote->rating : false;
     }
 }

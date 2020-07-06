@@ -46,7 +46,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        
+        //dd($product->usersRated());
         return view('shop.product.show', compact('product'));
     }
 

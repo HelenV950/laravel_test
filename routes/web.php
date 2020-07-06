@@ -78,6 +78,8 @@ Route::get('/reduce/{id}', 'CartController@getReduceByOne')->name('product.reduc
 
 Route::get('/order', 'OrderController@getOrderByUser')->name('user.order');
 
+Route::post('rating/{product}/add', 'RatingController@add')->name('rating.add');
+
 //Route::get('/order', 'User\UserController@getOrder')->prefix('user')->name('user.order');
 
 });
