@@ -8,7 +8,7 @@ use App\Models\OrderStatus;
 use App\Models\Product;
 use App\Models\User;
 use COM;
-use Gloudemans\Shoppingcart\Cart as ShoppingcartCart;
+//use Gloudemans\Shoppingcart\Cart as ShoppingcartCart;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

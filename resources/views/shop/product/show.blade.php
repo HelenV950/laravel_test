@@ -1,4 +1,5 @@
  @extends('layouts.app')
+ @inject('wishlist', 'App\Services\WishlistService')
 
 @section('content')
 <div class="container">
@@ -98,10 +99,24 @@
         <label class="star star-4" for="star-4"></label> 
         <input class="star star-5" value="5" id="star-5" type="radio" name="star">
         <label class="star star-5" for="star-5"></label> 
-        @endif
-    </div>
-    </div>
-  </form>
+       
+    @endif
+        </div>
+      </div>
+    </form>
+  <hr>
+      @if($wishlist->isUserFollowed($product))
+        <form action="{{route('wishlist.delete', $product)}}" method="POST">
+          @csrf
+          <input type="submit" class="btn btn-danger" value="remove">
+        </form>
+        @else
+          <a href="{{route('wishlist.add', $product)}}" class="btn btn-success">{{__('Add to Wish List')}}</a>
+          {{-- <a href="" class="btn btn-success">{{__('Add to Wish List')}}</a> --}}
+      @endif
+    
+
+
   </div>
   <p style="margin-top: 2%">Description: </p>
   <div class="">{{$product->description}}</div>

@@ -13,7 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
-    .sass('resources/sass/_rating.scss', 'public/css');
+ 
 
 mix.js('resources/js/admin/product-images.js', 'public/js/admin')
     .css('resources/css/main.css', 'public/css');

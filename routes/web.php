@@ -30,7 +30,6 @@ Route::prefix('ajax')->name('ajax.')->namespace('Ajax')->group(function () {
 });
 
 
-
 Route::get('category/{category}', 'CategoryController@show')->name('category.show');
 Route::get('category/', 'CategoryController@index')->name('category.index');
 
@@ -44,17 +43,12 @@ Route::get('product', "ProductController@index")->name('product.index');
 Route::get('/shop', 'ShopController@index')->name('shop');
 //Route::resource('category', 'CategoryController');
 
-
-
-
-
 Route::get('/', 'HomeController@index')->name('index');
 
 
 
 //*Shopping cart
 Route::get('/cart', 'CartController@index')->name('cart.index');
-
 Route::post('/cart/{product}/add', 'CartController@add')->name('cart.add');
 Route::post('/cart/{product}/count/update', 'CartController@update')->name('cart.count.update');
 Route::delete('/cart/{product}/delete', 'CartController@delete')->name('cart.delete');
@@ -81,6 +75,13 @@ Route::get('/order', 'OrderController@getOrderByUser')->name('user.order');
 Route::post('rating/{product}/add', 'RatingController@add')->name('rating.add');
 
 //Route::get('/order', 'User\UserController@getOrder')->prefix('user')->name('user.order');
+
+//* wishlist
+Route::get('/wishlist', 'WishlistController@index')->name('wishlist.index');
+Route::get('/wishlist/{product}/add', 'WishlistController@add')->name('wishlist.add');
+Route::get('user/wishlist', 'WishlistController@userList')->name('user.wishlist'); 
+Route::delete('/wishlist/{product}/delete', 'WishlistController@delete')->name('wishlist.delete');
+
 
 });
 

@@ -25,7 +25,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  
 
 </head>
 <body>
@@ -51,7 +52,11 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                            <a class="nav-link" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i>
+                                @if(Cart::instance('wishlist')->count() > 0)
+                                <span class="badge badge-pill badge-secondary">{{Cart::instance('wishlist')->count()}}</span>
+                                @endif
+                            </a>
                         </li>
 
                         <li class="nav-item">
