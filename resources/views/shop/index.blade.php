@@ -6,6 +6,7 @@ All Products
 
 @section('content')
 
+
 <div class="container">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -17,20 +18,25 @@ All Products
 <aside class="product-section container">
   <div class="sidebar">
     <h6>By Category</h6>
-    <ul class="categories">
-      <li><a href="{{route('category.index')}}">all categories</a></li>
-      <li><a href="#">provident</a></li>
-      <li><a href="#">beatae</a></li>
-      <li><a href="#">veniam</a></li>
-      <li><a href="#">veniam</a></li>
-    </ul>
+   <div class="category_link mt-3">
+      <p><a href="{{route('category.index')}}">all categories</a></p>
+
+      {{-- @foreach($categories as $category)
+        @include('shop.category-view', $category)
+      @endforeach --}}
+
+     <p><a href="#">provident</a></p>
+     <p><a href="#">beatae</a></p>
+      <p><a href="#">veniam</a></p>
+      <p><a href="#">veniam</a></p>
+    </div>
   </div>
 </aside>
 </div>
 
 <div class="col-md-10">
   
-  <div class="products text-center">
+  <div class="products">
     @foreach($products->chunk(3) as $productChunk)
 <div class="row">
   @foreach($productChunk as $product)

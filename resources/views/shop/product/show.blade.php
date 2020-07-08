@@ -15,9 +15,22 @@
 
 
 
-<div class="row justify-content-center">
-  <div class="col-md-12">
+<div class="row justify-content-end">
+  <div class="col-md-4">
     <h3 class="text-center">{{__($product->name)}}</h3>
+  </div>
+  <div class="col-md-4">
+    <div class="text-center"> 
+      @if($wishlist->isUserFollowed($product))
+      <form action="{{route('wishlist.delete', $product)}}" method="POST">
+        @csrf
+        <input type="submit" class="btn btn-danger" value="remove">
+      </form>
+      @else
+      <div class="like">
+      <a class="nav-link" href="{{route('wishlist.add', $product)}}"><i class="fa fa-heart-o fa-2x" aria-hidden="true"></i></a></div>
+    </div>
+      @endif
   </div>
 </div>
 <hr>
@@ -31,29 +44,30 @@
     @if($product->discount > 0)
       <p style="color: red; text-decoration: line-through">Old Price: ${{$product->price}}</p>
     @endif
-      <p>Price: <strong>${{$product->printPrice()}}</strong></p>
+      <p>PRICE: <strong>${{$product->printPrice()}}</strong></p>
       <p>SKU: {{$product->SKU}}</p>
-      <p>Quantity {{$product->quantity}}</p>
-
-          {{-- @if($product->usersRated() > 0) --}}
-          <p>Rating: {{round($product->averageRating(), 1) ?? 0}} /5 ({{$product->usersRated()}})</p>
-          {{-- @endif --}}
-        <hr>
-        <div class="">
-          <p>Product Categories</p>
-          @include('shop.category-view', ['category'=>$product->category()->first()])
+      <p>IN STOCK: {{$product->quantity}}</p>
+      <hr>
+       
+        <div class="product_category">
+          <div>Product Categories</div>
+          <div>@include('shop.category-view', ['category'=>$product->category()->first()])</div>
         </div>
-
-      {{-- @auth --}}
+        <hr>
+           {{-- @if($product->usersRated() > 0) --}}
+           <p>Rating: {{round($product->averageRating(), 1) ?? 0}} /5 ({{$product->usersRated()}})</p>
+           {{-- @endif --}}
+        
+    
       @if($product->quantity > 0)
       <hr>
       <div class="">
-        <p>Add to Cart:</p>
+        <p>Quantity</p>
        
-      <form action="{{route('cart.add', $product)}}" method="POST" class="form-inline">
+      <form action="{{route('cart.add', $product)}}" method="POST" class="form-inline" >
         @csrf
         @method('post')
-        <div class="form-froup mx-sm-3 mb-2">
+        <div class="form-froup  mb-2">
           <input type="hidden" name="price_with_discount" value="">
           <label for="product_count" class="sr-only">Count</label>
            <input type="number"
@@ -62,21 +76,25 @@
                   id="product_count"
                   min="1"
                   max="{{$product->quantity}}"
-                  value="1"> 
+                  value="1"
+                  style="width: 55px; height: 35px; margin-right:10px"> 
 
         </div> 
-        <button type="submit" class="btn btn-primary mb-2">Buy</button>
+        <button type="submit" class="btn btn-primary mb-2">Add to Cart</button>
       </form>
     </div>
   @endif
 <hr>
+
+ 
+@auth
 <form class="form-horizontal poststars" action="{{route('rating.add', $product)}}" id="addStar" method="POST">
   @csrf
   
 <div class="form-group required">
   <div class="col-sm-12">
 
-    @if($product->getUserProductRating()) 
+    @if(!$product->getUserProductRating()) 
     @for($i=5; $i>=1; $i--)
       <input type="star star-{{$i}}"
               value="{{$i}}"
@@ -100,26 +118,29 @@
         <input class="star star-5" value="5" id="star-5" type="radio" name="star">
         <label class="star star-5" for="star-5"></label> 
        
-    @endif
+     @endif 
         </div>
       </div>
     </form>
-  <hr>
-      @if($wishlist->isUserFollowed($product))
+  @endauth
+  
+      {{-- @if($wishlist->isUserFollowed($product))
         <form action="{{route('wishlist.delete', $product)}}" method="POST">
           @csrf
           <input type="submit" class="btn btn-danger" value="remove">
         </form>
         @else
           <a href="{{route('wishlist.add', $product)}}" class="btn btn-success">{{__('Add to Wish List')}}</a>
-          {{-- <a href="" class="btn btn-success">{{__('Add to Wish List')}}</a> --}}
-      @endif
+      
+      @endif --}}
     
 
 
   </div>
-  <p style="margin-top: 2%">Description: </p>
-  <div class="">{{$product->description}}</div>
+  <div class="">
+  <p style="margin-top: 2%">DESCRIPTION: </p>
+  <p>{{$product->description}}</p>
+</div>
   
 
   
@@ -132,6 +153,8 @@
       });
     </script>
 </div>    
+
+
 @endsection
 
 

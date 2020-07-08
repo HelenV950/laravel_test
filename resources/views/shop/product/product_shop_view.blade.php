@@ -34,8 +34,31 @@
              @endif
              <div class="">${{$product->printPrice()}}</div>
             </div>
-             {{-- <a href="{{route('shop.addToCart', ['id' => $product->id])}}" class="btn btn-primary pull-right">Add to Cart </a> --}}
-             <a href="{{route('cart.add', $product)}}" class="btn btn-primary pull-right">Add to Cart </a>
+          
+   
+             <form action="{{route('home.addToCart', $product)}}" method="POST" class="form-inline" >             
+              @method('POST')
+              @csrf
+              <div class="form-froup  mb-2">
+                <input type="hidden" name="price_with_discount" value="">
+                <label for="product_count" class="sr-only">Count</label>
+                 <input type="hidden"
+                        name="product_count"
+                        class="form-content"
+                        id="product_count"
+                        min="1"
+                        max="1"
+                        value="1"
+                       > 
+      
+              </div> 
+              <button type="submit" class="btn btn-primary mb-2">Add to Cart</button>
+            </form>
+
+
+
+
+             {{-- <a href="{{route('cart.add', $product)}}" class="btn btn-primary pull-right">Add to Cart </a> --}}
            </div>
        </div>
      </div>

@@ -16,10 +16,10 @@ Shopping Cart
       <li class="breadcrumb-item active" aria-current="page">Cart</li>
     </ol>
 
-    <h1 test-content>Cart</h1>
+    <h1 class="text-center">Cart</h1>
     <div class="row justify-content-md-center">
     
-      <div class="col-sm-12 col-md-12 col-md-offset-3 col-sm-offset-3">
+      <div class="col-sm-10 col-md-10 col-md-offset-3 col-sm-offset-3">
        
        <table class="table table-light">
           <thead>

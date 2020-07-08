@@ -16,23 +16,28 @@
 
 <div class="row">
   <div class="col-md-2">
-<aside class="product-section container">
-  <div class="sidebar">
-    <h6>By Category</h6>
-    <ul class="categories">
-      <li><a href="{{route('category.index')}}">all categories</a></li>
-      <li><a href="#">provident</a></li>
-      <li><a href="#">beatae</a></li>
-      <li><a href="#">veniam</a></li>
-      <li><a href="#">veniam</a></li>
-    </ul>
-  </div>
-</aside>
-</div>
+    <aside class="product-section container">
+      <div class="sidebar">
+        <h6>By Category</h6>
+          <div class="category_link mt-3">
+            <p><a href="{{route('category.index')}}">all categories</a></p>
+    
+          {{-- @foreach($categories as $category)
+            @include('shop.category-view', $category)
+          @endforeach --}}
+    
+            <p><a href="#">provident</a></p>
+            <p><a href="#">beatae</a></p>
+            <p><a href="#">veniam</a></p>
+            <p><a href="#">veniam</a></p>
+        </div>
+      </div>
+    </aside>
+    </div>
 
 <div class="col-md-10">
   
-  <h1 class="text-center">Products by {{$category['title']}}</h1>
+  <h1 class="text-center mb-4">Products by {{$category['title']}}</h1>
 
   <div class="products text-center">
     @foreach($products->chunk(3) as $productChunk)

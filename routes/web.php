@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+Route::post('/home/cart/{product}/add', 'ShopController@homeAddToCart')->name('home.AddToCart');
+
 Route::get('/about', function () {
     return view('about');
 });
@@ -41,6 +43,7 @@ Route::get('product', "ProductController@index")->name('product.index');
 
 
 Route::get('/shop', 'ShopController@index')->name('shop');
+Route::post('/shop/cart/{product}/add', 'ShopController@shopAddToCart')->name('shop.AddToCart');
 //Route::resource('category', 'CategoryController');
 
 Route::get('/', 'HomeController@index')->name('index');
@@ -52,7 +55,9 @@ Route::get('/cart', 'CartController@index')->name('cart.index');
 Route::post('/cart/{product}/add', 'CartController@add')->name('cart.add');
 Route::post('/cart/{product}/count/update', 'CartController@update')->name('cart.count.update');
 Route::delete('/cart/{product}/delete', 'CartController@delete')->name('cart.delete');
-//Route::get('/add-to-cart/{id}', 'CartController@getAddToCart')->name('product.addToCart');
+
+
+
 
 Route::middleware(['auth','user'])->group(function () {
 Route::get('user/profile', 'ProfileController@index')->name('user.profile');  
@@ -72,7 +77,7 @@ Route::get('/reduce/{id}', 'CartController@getReduceByOne')->name('product.reduc
 
 Route::get('/order', 'OrderController@getOrderByUser')->name('user.order');
 
-Route::post('rating/{product}/add', 'RatingController@add')->name('rating.add');
+
 
 //Route::get('/order', 'User\UserController@getOrder')->prefix('user')->name('user.order');
 
@@ -83,7 +88,12 @@ Route::get('user/wishlist', 'WishlistController@userList')->name('user.wishlist'
 Route::delete('/wishlist/{product}/delete', 'WishlistController@delete')->name('wishlist.delete');
 
 
+
 });
+
+//* Rating
+Route::post('rating/{product}/add', 'RatingController@add') ->middleware('auth')->name('rating.add');
+
 
 //* Mail
 Route::get('/send', 'MailController@send');
@@ -115,8 +125,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->name(
     //  Route::prefix('categories')->name('categories.')->group(function(){ 
     //     Route::get('/', 'CategoriesController@index')->name('index');
     //     Route::get('/create','CategoriesController@create')->name('create');
-    //         Route::patch('/edit', 'CatrgoriesController@edit')->name('edit');
-    //         Route::delete('/delete', 'CatrgoriesController@delete')->name('destroy');
+    //         Route::patch('/edit', 'CategoriesController@edit')->name('edit');
+    //         Route::delete('/delete', 'CategoriesController@delete')->name('destroy');
     // });
     Route::resource('categories', 'CategoriesController')->except(['show']);
 
@@ -132,7 +142,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->name(
     //     Route::prefix('users')->name('users.')->group(function(){
     //         Route::get('/', 'Admin@index')->name('index');
     //         Route::get('/{id}', 'Admin@profile')->name('profile')->where('id', '[0-9]+');
-    //         Route::delete('/delit', 'Admin@delete')->name('delit');
+    //         Route::delete('/delete', 'Admin@delete')->name('delete');
     //     });
 
 

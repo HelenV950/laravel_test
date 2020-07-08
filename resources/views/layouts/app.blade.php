@@ -60,9 +60,9 @@
                         </li>
 
                         <li class="nav-item">
-                            {{-- @if(auth()->user()->IsUser) --}}
+                       
                             <a class="nav-link" href="{{route('cart.index')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                {{-- @endif  --}}
+                               
                                 @if(Cart::instance('cart')->count() > 0)
                             <span class="badge badge-pill badge-secondary">{{Cart::instance('cart')->count()}}</span>
                             @endif
@@ -122,9 +122,9 @@
         </nav>
       
 
-       <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-        <div class="container">
-      <div class="collapse navbar-collapse  d-flex justify-content-end" id="navbarNavDropdown">
+   <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+      <div class="container">
+        <div class="collapse navbar-collapse  d-flex justify-content-end" id="navbarNavDropdown">
        
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
