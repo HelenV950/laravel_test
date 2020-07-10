@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Product;
 
 class User extends Authenticatable
 {
@@ -75,7 +76,29 @@ class User extends Authenticatable
     }
 
 
+    public function wishes()
+    {
+        return $this-> belongsToMany(
+            Product::class, 
+            'wishlist',
+            'user_id', 
+            'product_id'
+        );
+    }
 
+
+    public function addToWish(Product $product)
+    {
+        $this->wishes()->attach($product);
+    }
+
+    public function removeFromWish(Product $product)
+    {
+        $this->wishes()->detach($product);
+    }
+
+
+    
     //мутаторы
     public function setFirstNameAttribute($value)
     {

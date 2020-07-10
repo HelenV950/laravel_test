@@ -16,7 +16,7 @@ interface WishlistServiceInterface
 
   public function addItem(Product $product);
 
-  public function deleteItem(Product $product);
+  public function deleteItem(string $rowId, Product $product);
 
   
 }

@@ -20,28 +20,11 @@ class OrderController extends Controller
         
         $orders = Auth::user()->orders;
         $cartItem = Cart::instance('cart')->content();
-        // $products = Order::find(1)->products;
-        // foreach($orders as $order){
-
-     // dd($products);
-        //     dd($order->products()->attach($order,[
-        //        'quantity' => $quantity,
-        //         'price' => $product->price,
-        //     ]
-        // ));
+        $products = Order::find(1);
+     
               
 
-
-       // }
-       // $order = Order::all();
-     
-        // $orders->transform(function($order, $key){
-        //     $order->cart = unserialize($order->cart);
-        //     return $order;
-        // }); 
-       
-
-        return view('user/orders', ['orders' => $orders]);
+        return view('user/orders', compact('orders'));
 
     }
 
@@ -56,10 +39,10 @@ class OrderController extends Controller
         $cartTotal = (float) Cart::instance('cart')->total(2, '.', '');
         $cartItem = Cart::instance('cart')->content();
 
-        dd($cartItem);
+      //  dd($cartItem);
 
         if($cartTotal > auth()->user()->balance){
-            return redirect()->back()->with(['customError'=>'You don`t have enough money on your balance']);
+            return redirect()->back()->with(['customeError'=>'You don`t have enough money on your balance']);
         }
 
         $fields = $request->validated();

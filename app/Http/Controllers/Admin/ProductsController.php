@@ -137,7 +137,8 @@ class ProductsController extends Controller
       
       
 
-        return redirect(route('admin.products.index'))
+        return redirect()
+            ->back()
             ->with(['status' => 'The product was successfully updated!']);
     }
 

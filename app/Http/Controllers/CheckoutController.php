@@ -19,21 +19,6 @@ class CheckoutController extends Controller
     }
 
     
-    // public function getCheckout()
-    // {
-
-    //     if (!Session::has('cart')) {
-    //         return view('shop.shopping-cart', ['products' => null])
-    //             ->with(['status' => 'The cart is empty']);
-    //     }
-    //     $oldCart = Session::get('cart');
-    //     $cart = new Cart($oldCart);
-    //     $total = $cart->totalPrice;
-
-    //     $user = Auth::user();
-
-    //     //dd($user->id);
-    //     return view('shop.checkout', ['total' => $total, 'user' => $user]);
-    // }
+   
 
 }

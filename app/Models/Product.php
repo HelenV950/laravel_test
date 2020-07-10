@@ -6,6 +6,7 @@ use Gloudemans\Shoppingcart\CanBeBought;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 use willvincent\Rateable\Rateable;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 
 class Product extends Model implements Buyable
@@ -48,6 +49,17 @@ class Product extends Model implements Buyable
     }
 
 
+    public function followers()
+    {
+        return $this->belongsToMany(
+            User::class, 
+            'wishlist', 
+            'product_id',
+            'user_id'
+        );
+    }
+
+
     public function getShotDescriptionAttribute()
     {
         $more = strlen($this->description) > 100 ? '...' : '';
@@ -82,6 +94,8 @@ class Product extends Model implements Buyable
            ['user_id', auth()->id()],
            ['rateable_id', $this->id] 
         ])->first();
+
+        //dd($vote);
 
         return !empty($vote->rating) ? $vote->rating : false;
     }

@@ -9,7 +9,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Order::class, function (Faker $faker) {
 
-    $status = \App\Models\OrderStatus::where('type', '=', config('order_status.paid'))->first();
+    $status = \App\Models\OrderStatus::where('type', '=', config('orders_statuses.paid'))->first();
 
     return [
      

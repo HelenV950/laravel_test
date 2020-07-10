@@ -52,7 +52,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i>
+                            <a class="nav-link" href="{{route('user.wishlist')}}"><i class="fa fa-heart-o" aria-hidden="true"></i>
                                 @if(Cart::instance('wishlist')->count() > 0)
                                 <span class="badge badge-pill badge-secondary">{{Cart::instance('wishlist')->count()}}</span>
                                 @endif
@@ -97,6 +97,9 @@
                                     </a>
                                     <a class="dropdown-item" href="{{ route('user.order') }}">
                                         {{ __('My Orders') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('user.wishlist') }}">
+                                        {{ __('My WishList') }}
                                     </a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"

@@ -3053,7 +3053,7 @@ input.star {
 }
 
 label.star {
-  float: left;
+  float: right;
   padding: 10px;
   font-size: 20px;
   color: #444;

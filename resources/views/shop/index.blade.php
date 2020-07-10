@@ -15,20 +15,16 @@ All Products
 
 <div class="row">
   <div class="col-md-2">
-<aside class="product-section container">
-  <div class="sidebar">
-    <h6>By Category</h6>
-   <div class="category_link mt-3">
-      <p><a href="{{route('category.index')}}">all categories</a></p>
+    <aside class="product-section container">
+      <div class="sidebar">
+        <h6>By Category</h6>
+          <div class="category_link mt-3">
+            <div><a href="{{route('category.index')}}">all categories</a></div>
 
-      {{-- @foreach($categories as $category)
-        @include('shop.category-view', $category)
-      @endforeach --}}
-
-     <p><a href="#">provident</a></p>
-     <p><a href="#">beatae</a></p>
-      <p><a href="#">veniam</a></p>
-      <p><a href="#">veniam</a></p>
+    
+        @each('shop.category-view', $categories, 'category') 
+  
+    
     </div>
   </div>
 </aside>

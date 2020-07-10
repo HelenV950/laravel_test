@@ -29,7 +29,7 @@ class UpdateProductRequest extends FormRequest
             'shot_description.required' => 'Length of shot description should be more than 10 characters',
             'shot_description.max' => 'Max length of shot description should be less than 200',
             'price.required' => 'Price is required',
-            'thumbnail.required' => 'Thumbnail is required'
+          
 
 
         ];
@@ -60,7 +60,7 @@ class UpdateProductRequest extends FormRequest
                     ->ignore((request()->route()->parameter('product')->id))
             ],
             'shot_description' => 'required|min:10',
-            'thumbnail' => 'required|image',
+            'thumbnail' => 'image',
             'product_images.*' => 'image'
 
 

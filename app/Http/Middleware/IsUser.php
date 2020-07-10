@@ -16,11 +16,11 @@ class IsUser
     public function handle($request, Closure $next)
     {
          
-        // if(auth()->user()->IsUser){
-        //     return $next($request);
-        // }
+        if(auth()->user()->IsUser){
+            return $next($request);
+        }
         
-        // return redirect('/')->with(['customError' => 'This page only for registered users']);
+        return redirect('/')->with(['customError' => 'This page only for registered users']);
        
     }
 }

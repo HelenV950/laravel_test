@@ -13,8 +13,10 @@ class ShopController extends Controller
     {
         $products = Product::all()->where('quantity', '>', '0');
         $categories = Category::all();
-    
-        return view('shop.index')->with('products', $products, 'categories', $categories);
+        
+        return view('shop.index', compact('categories'), compact('products'));
+      
+       
     }
 
     public function shopAddToCart(Request $request, Product $product)
