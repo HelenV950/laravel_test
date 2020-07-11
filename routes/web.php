@@ -104,3 +104,5 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->name(
     Route::resource('categories', 'CategoriesController')->except(['show']);
   
 });
+
+   Route::post('comment/{product}/add', 'CommentController@add')->name('comment.add')->middleware('auth');

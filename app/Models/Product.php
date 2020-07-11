@@ -7,6 +7,7 @@ use Gloudemans\Shoppingcart\Contracts\Buyable;
 use willvincent\Rateable\Rateable;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Comment;
 
 
 class Product extends Model implements Buyable
@@ -46,6 +47,11 @@ class Product extends Model implements Buyable
     public function images()
     {
         return $this->morphMany(\App\Models\Image::class, 'imageable');
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(\App\Models\Comment::class, 'commentable');
     }
 
 

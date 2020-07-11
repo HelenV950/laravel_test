@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -46,8 +47,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //dd($product->usersRated());
-        return view('shop.product.show', compact('product'));
+  
+        $comments = $product->comments()->with('user')->get();
+        return view('shop.product.show', compact('product',  'comments'));
     }
 
     /**

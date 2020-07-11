@@ -117,6 +117,11 @@
   </div>
   
 
+  <div class="">
+    @include('comments.index', ['comments'=>$comments, 'product'=>$product])
+  </div>
+  
+
   
 </div>
     <script>
