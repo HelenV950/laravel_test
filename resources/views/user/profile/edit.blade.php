@@ -20,11 +20,11 @@
         <label for="Name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
         <div class="col-md-6">
-            <input id="SKU" 
+            <input id="name" 
             type="text" 
             class="form-control @error('name') is-invalid @enderror" 
             name="name" 
-            value="{{ Auth::user()->name }}" 
+            value="{{ Auth::user()->name ?? 0}}" 
            
             autofocus>
 
@@ -40,11 +40,11 @@
         <label for="Surname" class="col-md-4 col-form-label text-md-right">{{ __('SurName') }}</label>
 
         <div class="col-md-6">
-            <input id="SKU" 
+            <input id="surname" 
             type="text" 
             class="form-control @error('surname') is-invalid @enderror" 
             name="surname" 
-            value="{{ Auth::user()->surname }}" 
+            value="{{ Auth::user()->surname ?? 0}}" 
           
             autofocus>
 
@@ -65,7 +65,7 @@
             type="email" 
             class="form-control @error('email') is-invalid @enderror" 
             name="email" 
-            value="{{ Auth::user()->email }}" 
+            value="{{ Auth::user()->email ?? 0}}" 
           
             autofocus>
 
@@ -83,11 +83,11 @@
         <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
 
         <div class="col-md-6">
-            <input id="address" 
+            <input id="phone" 
             type="text" 
             class="form-control @error('phone') is-invalid @enderror" 
             name="phone" 
-            value="{{Auth::user()->phone }}" 
+            value="{{Auth::user()->phone ?? 0 }}" 
           
             autofocus>
 

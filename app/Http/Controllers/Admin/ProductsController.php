@@ -108,14 +108,14 @@ class ProductsController extends Controller
     {
         //dd($request->files);
         $product->update([
-            'SKU' => $request->get('SKU'),
-            'name' => $request->get('name'),
-            'category' => $request->get('category'),
-            'thumbnail' => $request->get('thumbnail'),
-            'shot_description' => $request->get('shot_description'),
-            'price' => $request->get('price'),
-            'discount' => $request->get('discount'),
-            'quantity' => $request->get('quantity')
+            'SKU'               => $request->get('SKU'),
+            'name'              => $request->get('name'),
+            'category'          => $request->get('category'),
+            'thumbnail'         => $request->get('thumbnail'),
+            'shot_description'  => $request->get('shot_description'),
+            'price'             => $request->get('price'),
+            'discount'          => $request->get('discount'),
+            'quantity'          => $request->get('quantity')
         ]);
 
       

@@ -33,9 +33,10 @@ class UsersController extends Controller
        // $user = Auth::user();
 
         $user->update([
-            'name' => $request->get('name'),
-            'surname' => $request->get('surname'),
-            'phone' => $request->get('phone')
+            'name'      => $request->get('name'),
+            'surname'   => $request->get('surname'),
+            'phone'     => $request->get('phone'),
+            'email'     => $request->get('email'),
         ]);
 
         return redirect(route('user.profile.update'))
