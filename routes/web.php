@@ -82,7 +82,8 @@ Route::middleware('auth')->group(function () {
     Route::post('rating/{product}/add', 'RatingController@add')->name('rating.add');
     //*comment
 
-    Route::post('comments/{product}/add', 'CommentController@add')->name('comments.add');
+    Route::post('/comments/{product}/add', 'CommentController@add')->name('comments.add');
+    Route::get('/comments/{product}/all_comments', 'CommentController@show')->name('comments.show');
 });
 
 

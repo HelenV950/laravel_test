@@ -20,4 +20,9 @@ class CommentController extends Controller
 
       return redirect()->back()->with(['status' => 'Comment was added']);
     }
+
+    public function show(Request $request, Product $product)
+    {
+      return view('comments.all_comments');
+    }
 }

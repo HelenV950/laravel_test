@@ -117,9 +117,8 @@
   </div>
   
 <div class="">
-  <div class="">
-    @include('comments.index', ['comments'=>$comments, 'product'=>$product])
-  </div>
+     @include('comments.index', ['comments'=>$comments, 'product'=>$product]) 
+  
   
 </div>
   
