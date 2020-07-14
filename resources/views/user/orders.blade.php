@@ -30,9 +30,9 @@
                 <div>{{$order['user_surname']}}</div>
                 <div>{{$order['user_email']}}</div>
                 <div>{{$order['user_phone']}}</div>
-                <div>{{$order['user_country']}}</div>
-                <div>{{$order['user_city']}}</div>
-                <div>{{$order['user_address']}}</div>
+                <div>{{$order['country']}}</div>
+                <div>{{$order['city']}}</div>
+                <div>{{$order['address']}}</div>
               
             </div>
          </td>

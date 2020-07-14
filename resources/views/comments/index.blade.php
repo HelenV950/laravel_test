@@ -1,6 +1,6 @@
 <div class="col-md-12">
   <hr>
-    <h4>COMMENTS</h4>
+    <p>COMMENTS:</p>
     <div class="col-cm-12">
       @each('comments.single', $comments, 'comment')
       <br>
@@ -14,22 +14,26 @@
     </div>
 
     @push('footer-scripts')
-    
-  <script>
-    $(function(){
-      $(document).on('click', '.reply', function(e){
-        e.preventDefault();
-        let userName = $(this).parent().find('.user_name').text();
-        $('#parent_id').val($(this).data('parent_id'));
-        $('#comment').val('@${userName} ');
-        $('html, body').animate({
-          scrollTop: $("omment").offset().top - 40
-        }, 2000);
-        $('#comment').focus();
-  
-      });
-    });
-  </script>
+      <script>
+          $(function(){
+            $(document).on('click', '.reply', function(e){
+              e.preventDefault();
+
+             // alert($(this).data('parent_id'));
+              let userName = $(this).parent().find('.user_name').text();
+             // $(this).parent().parent().append('<h5>hi</h5');  
+            //alert(userName);
+
+              $('#parent_id').val($(this).data('parent_id'));
+              $('#comment').val('@${userName} ');
+              $('html, body').animate({
+                scrollTop: $("#comment").offset().top - 40
+              }, 2000);
+              $('#comment').focus();
+        
+            });
+          });
+      </script>
     @endpush
 
 

@@ -19,9 +19,10 @@ class OrderController extends Controller
     {
         
         $orders = Auth::user()->orders;
-        $cartItem = Cart::instance('cart')->content();
-        $products = Order::find(1);
-     
+      //  $order = Order::with('product')->find(1);
+        // $cartItem = Cart::instance('cart')->content();
+        // $products = Order::find(1);
+        dd($order);
               
 
         return view('user/orders', compact('orders'));

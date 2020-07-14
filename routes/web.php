@@ -63,28 +63,36 @@ Route::post('/cart/{product}/add', 'CartController@add')->name('cart.add');
 Route::post('/cart/{product}/count/update', 'CartController@update')->name('cart.count.update');
 Route::delete('/cart/{product}/delete', 'CartController@delete')->name('cart.delete');
 
+//*checkout
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout', 'CheckoutController')->name('checkout');
+    Route::post('/order/create', 'OrderController@create')->name('order.create');
+    Route::get('/thankyou/{order}', function($order){
+        return view('shop.checkout.thankyou', compact('order'));
+    })->name('thankyou');
+    Route::get('/order', 'OrderController@getOrderByUser')->name('user.order');
+
+    //* wishlist
+    Route::get('/wishlist', 'WishlistController@index')->name('wishlist.index');
+    Route::get('/wishlist/{product}/add', 'WishlistController@add')->name('wishlist.add');
+    Route::get('user/wishlist', 'WishlistController@userList')->name('user.wishlist'); 
+    Route::delete('/wishlist/{product}/delete', 'WishlistController@delete')->name('wishlist.delete');
+    //* Rating
+
+    Route::post('rating/{product}/add', 'RatingController@add')->name('rating.add');
+    //*comment
+
+    Route::post('comments/{product}/add', 'CommentController@add')->name('comments.add');
+});
+
 
 
 //*auth()->user
 Route::middleware(['auth','user'])->group(function () {
-Route::get('user/profile', 'ProfileController@index')->name('user.profile');  
-Route::get('user/profile/edit', 'ProfileController@edit')->name('user.profile.edit');  
-Route::post('user/profile/update', 'ProfileController@update')->name('user.profile.update');  
-Route::get('/order', 'OrderController@getOrderByUser')->name('user.order');
-//*checkout
-Route::get('/checkout', 'CheckoutController')->name('checkout');
-Route::post('/order/create', 'OrderController@create')->name('order.create');
-Route::get('/thankyou/{order}', function($order){
-    return view('shop.checkout.thankyou', compact('order'));
-})->name('thankyou');
-//* wishlist
-Route::get('/wishlist', 'WishlistController@index')->name('wishlist.index');
-Route::get('/wishlist/{product}/add', 'WishlistController@add')->name('wishlist.add');
-Route::get('user/wishlist', 'WishlistController@userList')->name('user.wishlist'); 
-Route::delete('/wishlist/{product}/delete', 'WishlistController@delete')->name('wishlist.delete');
-//* Rating
-Route::post('rating/{product}/add', 'RatingController@add')->name('rating.add');
-
+    Route::get('user/profile', 'ProfileController@index')->name('user.profile');  
+    Route::get('user/profile/edit', 'ProfileController@edit')->name('user.profile.edit');  
+    Route::post('user/profile/update', 'ProfileController@update')->name('user.profile.update');  
+  
 });
 
 
@@ -102,7 +110,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->namespace('Admin')->name(
     Route::resource('products', 'ProductsController')->except(['show']);
 
     Route::resource('categories', 'CategoriesController')->except(['show']);
-  
 });
 
-   Route::post('comment/{product}/add', 'CommentController@add')->name('comment.add')->middleware('auth');
+  

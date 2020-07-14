@@ -116,13 +116,14 @@
       <p>{{$product->description}}</p>
   </div>
   
-
+<div class="">
   <div class="">
     @include('comments.index', ['comments'=>$comments, 'product'=>$product])
   </div>
   
-
+</div>
   
+
 </div>
     <script>
       $(function(){
