@@ -141,3 +141,60 @@ input[type=product_count] {
     justify-content: center;
     align-items: center;
 }
+
+.block {
+    margin-top: 5%;
+}
+
+/* flex-контейнер */
+.block__row {
+
+
+    display: flex;
+}
+
+/* flex-элемент */
+.block__element {
+
+    /* border: 1px solid #838385; */
+    flex: 0 1 33.333%;
+    height: 50px;
+
+}
+
+/* flex-элемент №1 */
+.block__element_1 {
+ background-color: rgb(255, 244, 230);
+}
+
+/* flex-элемент №2 */
+.block__element_2 {
+    background-color: #e4edeb;
+}
+
+/* flex-элемент №3 */
+.block__element_3 {
+    background-color: #fde9e0;
+    
+}
+
+/* flex-элемент №3 */
+.block__element_4 {
+    background-color: #e0ecfb;
+}
+
+/* flex-элемент №3 */
+.block__element_5 {
+    background-color: #f1f8ee;
+}
+
+/* контент */
+.block__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #18b5a4; */
+    height: 100%;
+  
+    /* плюс прочие стили для текста, отступы */
+}

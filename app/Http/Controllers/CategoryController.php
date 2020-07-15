@@ -19,10 +19,10 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-
+        $categories = Category::all();
         $category->products()->get();
         $products = $category->products()->get();
         
-        return view('shop.category.show', compact('category', 'products'));
+        return view('shop.category.show', compact('category', 'products'))->with('categories', $categories);
     }
 }

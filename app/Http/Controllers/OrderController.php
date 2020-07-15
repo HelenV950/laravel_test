@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateOrderRequest;
 use App\Models\Order;
+use App\Models\Product;
 
 use App\Models\OrderStatus;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -15,16 +16,15 @@ class OrderController extends Controller
 {
 
 
-    public function getOrderByUser()
+    public function getOrderByUser(Request $request, Product $product)
     {
         
         $orders = Auth::user()->orders;
       //  $order = Order::with('product')->find(1);
-        // $cartItem = Cart::instance('cart')->content();
+        
         // $products = Order::find(1);
-        dd($order);
-              
-
+     
+            
         return view('user/orders', compact('orders'));
 
     }

@@ -1,4 +1,6 @@
 <div class="">
+      <p>hh</p>
+
       <a href="{{route('product.show', $row->id)}}">
       <strong>{{$row->name}}</strong>
       </a>
