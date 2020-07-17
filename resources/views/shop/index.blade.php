@@ -20,7 +20,10 @@ All Products
         <h6>By Category</h6>
           <div class="category_link mt-3">
             <div><a href="{{route('category.index')}}">all categories</a></div>
-
+            <div>
+            
+         
+</div>
     
         @each('shop.category-view', $categories, 'category') 
   

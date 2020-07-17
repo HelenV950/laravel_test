@@ -23,7 +23,7 @@ All Categories
   
   <div class="categories text-center">
     @foreach($categories->chunk(3) as $categoryChunk)
-<div class="row">
+<div class="row d-flex justify-content-around mt-5">
   @foreach($categoryChunk as $category)
 
 @include('shop.category.categ')

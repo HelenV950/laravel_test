@@ -99,14 +99,10 @@
                                 <input id="thumbnail" 
                                 type="file" 
                                 class="form-control @error('thumbnail') is-invalid @enderror" 
-                                name="thumbnail" 
-                                value="{{ old('thumbnail') }}">
+                                name="thumbnail" >
+                           
   
-                                @error('thumbnail')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            
                             </div>
                         </div>
                 

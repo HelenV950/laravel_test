@@ -43,10 +43,10 @@ class ProductsController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
+        //dd($request);
         //dd($request->file('product_images'));
         $product = $request->all();
 
-       // dd($request);
         unset($product['product_images']);
         unset($product['thumbnail']);
         unset($product['_token']);
@@ -91,6 +91,7 @@ class ProductsController extends Controller
      */
     public function edit(Product $product)
     {
+       // dd($product);
         $categories = Category::all()->toArray();
         $images = $product->images;
        // dd($images);
@@ -106,19 +107,41 @@ class ProductsController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //dd($request->files);
+        //dd($request->product);
+   
+
         $product->update([
             'SKU'               => $request->get('SKU'),
             'name'              => $request->get('name'),
             'category'          => $request->get('category'),
-            'thumbnail'         => $request->get('thumbnail'),
+            'thumbnail'         => $product->thumbnail,
+            // 'thumbnail'         => $request->get('thumbnail'),
             'shot_description'  => $request->get('shot_description'),
             'price'             => $request->get('price'),
             'discount'          => $request->get('discount'),
             'quantity'          => $request->get('quantity')
         ]);
 
-      
+    //  dd($request->product);
+
+        // if (!empty($request->file('thumbnail'))) {
+        //     $imageService   = app()->make(\App\Services\Contract\ImageServiceInterface::class);
+        //     $filePath       = $imageService->upload($request->file('thumbnail'));
+        //     $oldThumbnail   = $product->thumbnail;
+
+        //     if (!is_null($oldThumbnail)) {
+        //         $imageService->remove($oldThumbnail->path);
+        //     }
+    
+        //     if (is_null($oldThumbnail)) {
+        //         $product->thumbnail->create(['path' => $filePath]);
+        //     } else {
+        //         $product->thumbnail->update(['path' => $filePath]);
+        //     }
+        // }
+  //dd($request->files);
+   
+
         if (!empty($request->file('image'))) {
             $imageService   = app()->make(\App\Services\Contract\ImageServiceInterface::class);
             $filePath       = $imageService->upload($request->file('image'));

@@ -39,8 +39,10 @@
 
         <td>
              <div>
-               @each('shop.cart.parts.my_order_view', Cart::instance('cart')->content(), 'row') 
-               hello
+             
+               {{-- {{$product->pluck('name')}} --}}
+               <div>@include('user.order_view', ['product'=>$order->products()->first()])</div>
+               
             
             </div>
          </td>

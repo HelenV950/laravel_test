@@ -16,16 +16,21 @@ class OrderController extends Controller
 {
 
 
-    public function getOrderByUser(Request $request, Product $product)
+    public function getOrderByUser(Product $product)
     {
         
         $orders = Auth::user()->orders;
-      //  $order = Order::with('product')->find(1);
-        
-        // $products = Order::find(1);
+    
+        foreach($orders as $order){
+          $product = $order->products();
+        }
      
-            
-        return view('user/orders', compact('orders'));
+        $order->products()->first();
+
+        //$product =  $order->products()->orderBy('name')->get();
+        //dd($product);
+   
+        return view('user/orders', compact('orders', 'product'));
 
     }
 
@@ -83,59 +88,4 @@ class OrderController extends Controller
         return redirect()->route('thankyou', compact('order'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-}
+   }
